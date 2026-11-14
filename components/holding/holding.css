@@ -14,24 +14,55 @@
   color: var(--holding-ink);
 }
 
+/* The changing background: five photographs stacked, each fading in over the last in turn.
+   Cycle = 5 x 9s = 45s. A layer fades in over 2.25s (5% of the cycle) and then stays fully opaque until the next
+   layer has finished fading in over it (25%), so the picture never dips towards black between photographs.
+   The entering layer is raised above the others while it fades; z-index is what lets the first layer fade in over
+   the last at the wrap. Written for exactly five layers (see backdrop.tsx). */
+.holding-backdrop {
+  --slot: 9s;
+  position: absolute;
+  inset: 0;
+  z-index: 0; /* its own stacking context: the layer ordering inside it must not compete with the page content */
+}
 .holding-photo {
   object-fit: cover;
   object-position: 50% 50%;
   /* Dimmed to a warm texture: the page is about the building, and the photograph is only the place it stands. */
   filter: saturate(0.5) brightness(0.55) contrast(1.05);
-  animation: photo-in 1.8s ease-out backwards;
+  opacity: 0;
+  z-index: 1;
+  animation: backdrop-cycle calc(var(--slot) * 5) linear calc(var(--slot) * var(--slide)) infinite
+    backwards;
 }
-@keyframes photo-in {
-  from {
+@keyframes backdrop-cycle {
+  0% {
     opacity: 0;
+    z-index: 2;
+    animation-timing-function: ease-out;
   }
-  to {
+  5% {
     opacity: 1;
+    z-index: 2;
+  }
+  5.01% {
+    opacity: 1;
+    z-index: 1;
+  }
+  25% {
+    opacity: 1;
+    z-index: 1;
+  }
+  25.01%,
+  100% {
+    opacity: 0;
+    z-index: 1;
   }
 }
 
 .holding-scrim {
   position: absolute;
+  z-index: 3; /* above every photograph, below the content */
   inset: 0;
   background:
     linear-gradient(
@@ -418,6 +449,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* No cycling: the first photograph, still. */
+  .holding-photo {
+    animation: none;
+  }
+  .holding-photo-first {
+    opacity: 1;
+  }
   .elev-line,
   .elev-tinted,
   .reveal {

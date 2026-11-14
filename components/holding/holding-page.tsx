@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { getEnv } from "@/lib/security/env";
 import { charity } from "@/lib/site/charity";
 import { CONSENT_TEXT } from "@/lib/subscribers/consent";
+import { Backdrop } from "./backdrop";
 import { DayCounter } from "./day-counter";
 import { Elevation } from "./elevation";
 import { SignupForm } from "./signup-form";
@@ -17,17 +17,8 @@ export function HoldingPage() {
 
   return (
     <div className="holding">
-      {/* The palm grove at the Abajah site (KAY_5841, client photography, foliage only), dimmed to a texture. */}
-      <Image
-        // src="/media/holding-bg.jpg"
-        src="/media/holding-bg-1.jpg"
-        alt=""
-        fill
-        priority
-        sizes="250vw"
-        className="holding-photo"
-      />
-      <div className="holding-scrim" aria-hidden="true" />
+      {/* The palm grove at the Abajah site (client photography, foliage only), dimmed to a texture and slowly changing. */}
+      <Backdrop />
 
       <a href="#signup-email" className="skip-link">
         Skip to sign-up
