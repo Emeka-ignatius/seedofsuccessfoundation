@@ -195,16 +195,29 @@ Done and tested locally: branch renamed to `main`; root `CLAUDE.md`; strict CLAU
 
 ### Phase 0 — Holding page (Week 0; the PRD's half-day budget applies to the page itself)
 
-Creates: `app/(site)/holding/`, `Subscriber` table + migration, signup server action, `SITE_MODE` gate in `proxy.ts`, minimal `/privacy`, OG image, favicon.
+Creates: `components/holding/` rendered at `/`, `Subscriber` + `RateLimitBucket` tables and migration, signup server action, `SITE_MODE` gate in `proxy.ts` (`lib/security/gate.ts`), minimal `/privacy`, generated OG image, robots. Favicon is still the Next.js default until the logo arrives.
 
 Content per PRD §3A: dimmed Abajah build photo (compressed), "St Perpetua Hospital is rising in Orlu.", the one-line need, **Day N of construction** counter from 29 January 2026, mission line, email field with consent line, charity footer no. 1219306, contact once mailboxes exist.
 
 - **SVG elevation:** stand-in drawn by me, self-drawing via `stroke-dasharray`/`stroke-dashoffset` over ~2.5–3 s, final outline persists. `prefers-reduced-motion` → fully drawn, no animation. Marked in code and in the changelog as a placeholder to swap.
-- **Counter:** computed from a fixed date; render so the page stays cacheable (compute on the client after hydration, with a correct server-rendered value as fallback), and decide the timezone explicitly (Europe/London).
-- Signup protected by Turnstile + honeypot + the Postgres rate limiter; duplicate emails handled quietly.
+- **Counter:** `use cache` with a minutes-long lifetime, computed from London calendar dates (Day 1 = 29 January 2026; Day 290 on 14 Nov 2026). **Changed from the original idea:** a request-time value behind Suspense streams in through a script and never appears with JavaScript off, so it is cached into the static HTML instead. It can lag a few minutes after London midnight.
+- Signup protected by Turnstile + honeypot + the Postgres rate limiter; duplicate emails handled quietly. **Changed:** because Turnstile needs JavaScript, the form needs JavaScript. With JS off the page, building and day count still work, and a note explains the form. Skipping the check for no-JS visitors would defeat it.
+- **Background photo:** the palm grove cropped from KAY_5841 (foliage only), produced by `pnpm media:holding`. See "Photography findings" below for why it is not a people shot.
 - No donation functionality, no Stripe.
 
-**Gate:** Lighthouse mobile LCP < 2 s on the preview; works with JS disabled (static outline, form posts); reduced-motion verified; a test asserts `/admin`, `/donate` and API routes are unreachable in `SITE_MODE=holding`; signup row appears in Neon; `title`, description, OG image render correctly in a link-preview check.
+**Gate:** Lighthouse mobile LCP < 2 s on the preview; works with JS disabled (building, day count and text; the form needs JS); reduced-motion verified; a test asserts `/admin`, `/donate` and API routes are unreachable in `SITE_MODE=holding`; signup row appears in Neon; `title`, description, OG image render correctly in a link-preview check.
+
+**Status (14 Nov 2026): built and verified locally, uncommitted.** Verified: `pnpm build` (`/` static, revalidating every minute); gate over real HTTP in `holding`, unset, `LIVE` and `live ` modes (all fail closed); security headers; Turnstile widget loads under the CSP; 16-check browser test of signup against the real London database (invalid, valid, duplicate, honeypot, rate limit; rows cleaned up); animation state sampled at six moments (settles by ~2.7 s); layouts at 390, 768, 1024, 1280x720, 1440x900 and 1920x1080 with no horizontal scroll; reduced-motion and no-JS renders; 112 unit/strict tests plus 7 against the real database. **Not yet done:** Lighthouse run on a Vercel preview, a screen-reader pass, the link-preview check, and Vercel deployment itself (needs the project link and env vars).
+
+**Photography findings (read before using the client's photos):**
+
+- `public/images/day_1/camera/` holds 56 raw JPEGs (~85 MB) of three events: medical outreach (patients including a child), the UK group meeting hosts, and the foundation-stone ceremony at Abajah (clergy, builders, parishioners). They carry EXIF and are **tracked in git and pushed to `origin/dev`**.
+- **They are in `/public`, so once `SITE_MODE=live` every original is served at a guessable URL**, including the patient photos. In holding mode the gate blocks them. Decide before launch: move originals out of `public/` (keep the Drive as source, commit only optimised derivatives), and consider removing them from git history (a force-push; your call).
+- Photographer credit "Kay Images" is watermarked on many frames. Confirm licence and credit terms with the client.
+- Identifiable people (clergy, parishioners, patients, children) need confirmed permission before use on a public site. Until then the holding page uses foliage only. Best finds for later: KAY_5923 (five local builders in hard hats, "Orlu people as agents", for the hospital page), KAY_5854 to KAY_5877 (the stone blessing), KAY_5612 to KAY_5621 (the two communities together).
+- A logo is visible on the volunteers' shirts (purple with green and teal). That likely drives the brand palette, which would **not** be the "earth and warmth" the PRD guessed. Confirm with the designer in Phase 1.
+
+**Client inputs:** headline confirmation, mailbox once live, approved consent wording and privacy notice, retention period for subscriber emails, photo permissions (above).
 
 **Client inputs:** headline confirmation, build-site photos (received), mailbox once live, approved consent/privacy wording.
 
@@ -275,22 +288,29 @@ Sentry and uptime watch for the first week, GA4 conversion check, Search Console
 
 ## 6. Dependency tracker
 
-| Dependency                                       | Blocks                                        | Owner             | Status                           |
-| ------------------------------------------------ | --------------------------------------------- | ----------------- | -------------------------------- |
-| B3 Stripe account opened and verified            | Live keys (Phase 4). Test mode is unaffected  | Client            | Open. **Start now**              |
-| B8 HMRC Gift Aid registration + Charities Online | Real claims, and approved declaration wording | Client            | Open. **Start now**, postal code |
-| B5 Donation notification recipient               | Admin notifications, settings                 | Client            | Open                             |
-| B6 Events/News                                   | Nothing blocks. Working assumption L7         | Client            | Open, assumed option 3           |
-| B7 Nigerian donor route                          | Nigerian bank details on `/donate`            | Client            | Open, assumed option 1           |
-| Logo, colours, fonts                             | Phase 1 design                                | Client's designer | Outstanding                      |
-| Registered address, phone                        | Footer, contact, legal                        | Client            | Outstanding                      |
-| Impact labels, sponsorship tiers                 | Donation Step 1, Get Involved                 | Client            | Outstanding                      |
-| Health statistics with sources                   | Home, hospital                                | Client            | Outstanding                      |
-| Testimonials (Orlu and UK parishes)              | Voices section                                | Client            | Outstanding                      |
-| Gift Aid declaration wording approval            | Phase 3                                       | Client            | Outstanding                      |
-| Fee-cover vs Gift Aid treatment                  | Phase 3                                       | Client treasurer  | Outstanding                      |
-| GitHub repo and handle                           | Phase F CODEOWNERS                            | You               | Outstanding                      |
-| Mailboxes live                                   | Phase 0 contact line, Resend domain           | Client / you      | Outstanding                      |
+| Dependency                                       | Blocks                                        | Owner              | Status                                                   |
+| ------------------------------------------------ | --------------------------------------------- | ------------------ | -------------------------------------------------------- |
+| B3 Stripe account opened and verified            | Live keys (Phase 4). Test mode is unaffected  | Client             | Open. **Start now**                                      |
+| B8 HMRC Gift Aid registration + Charities Online | Real claims, and approved declaration wording | Client             | Open. **Start now**, postal code                         |
+| B5 Donation notification recipient               | Admin notifications, settings                 | Client             | Open                                                     |
+| B6 Events/News                                   | Nothing blocks. Working assumption L7         | Client             | Open, assumed option 3                                   |
+| B7 Nigerian donor route                          | Nigerian bank details on `/donate`            | Client             | Open, assumed option 1                                   |
+| Logo, colours, fonts                             | Phase 1 design                                | Client's designer  | Outstanding                                              |
+| Registered address, phone                        | Footer, contact, legal                        | Client             | Outstanding                                              |
+| Impact labels, sponsorship tiers                 | Donation Step 1, Get Involved                 | Client             | Outstanding                                              |
+| Health statistics with sources                   | Home, hospital                                | Client             | Outstanding                                              |
+| Testimonials (Orlu and UK parishes)              | Voices section                                | Client             | Outstanding                                              |
+| Gift Aid declaration wording approval            | Phase 3                                       | Client             | Outstanding                                              |
+| Fee-cover vs Gift Aid treatment                  | Phase 3                                       | Client treasurer   | Outstanding                                              |
+| GitHub repo and handle                           | Phase F CODEOWNERS                            | You                | Repo exists; handle outstanding                          |
+| Mailboxes live                                   | Phase 0 contact line, Resend domain           | Client / you       | Outstanding                                              |
+| Contact email (privacy notice, footer)           | Holding page go-live, UK GDPR rights requests | Client             | Outstanding. `pnpm launch:check` fails until set         |
+| Approval of consent wording and privacy notice   | Holding page go-live                          | Client             | Draft written (`lib/subscribers/consent.ts`, `/privacy`) |
+| Subscriber email retention period                | Holding page go-live                          | Client             | Proposed: until unsubscribed. Needs a decision           |
+| Permission to use identifiable people in photos  | About, Hospital, Outreach pages               | Client             | Outstanding                                              |
+| Photo licence and credit terms (Kay Images)      | Every page using the photos                   | Client             | Outstanding                                              |
+| Architect's elevation drawing                    | Replacing the stand-in building               | Client / architect | Outstanding. Stand-in ships meanwhile                    |
+| Cloudflare Turnstile keys (client account)       | Production sign-up                            | You                | Test keys in use for development                         |
 
 ---
 

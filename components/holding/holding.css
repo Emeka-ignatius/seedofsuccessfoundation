@@ -1,0 +1,429 @@
+/* Holding page. Colours are temporary tokens drawn from the foundation-stone photograph (red earth, palm shade).
+   Replace with the brand palette when the logo arrives (PRD §5). Contrast figures are for text on --holding-bg. */
+.holding {
+  --holding-bg: #17100c;
+  --holding-ink: #f6ecda; /* 16:1 */
+  --holding-muted: #d3c4aa; /* 10:1 */
+  --holding-line: #ecdcc0;
+  --holding-accent: #e07b4c; /* button fill; --holding-bg text on it is 6.3:1 */
+
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--holding-bg);
+  color: var(--holding-ink);
+}
+
+.holding-photo {
+  object-fit: cover;
+  object-position: 50% 50%;
+  /* Dimmed to a warm texture: the page is about the building, and the photograph is only the place it stands. */
+  filter: saturate(0.5) brightness(0.55) contrast(1.05);
+  animation: photo-in 1.8s ease-out backwards;
+}
+@keyframes photo-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.holding-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgb(23 16 12 / 0.55) 0%,
+      rgb(23 16 12 / 0.7) 45%,
+      rgb(23 16 12 / 0.92) 100%
+    ),
+    radial-gradient(120% 80% at 20% 20%, rgb(23 16 12 / 0.35), transparent 60%);
+}
+
+.holding-layout {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+}
+
+.holding-header {
+  padding: 2rem 1.5rem 0;
+}
+.holding-stage {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.holding-main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  padding: 2rem 1.5rem 2.5rem;
+  max-width: 62rem;
+}
+@media (min-width: 640px) {
+  .holding-header {
+    padding: 2.5rem 3rem 0;
+  }
+  .holding-main {
+    padding: 3rem 3rem 3rem;
+  }
+}
+@media (min-width: 1024px) {
+  .holding-header {
+    padding: 3rem 5rem 0;
+  }
+  .holding-main {
+    padding: 3vh 5rem 2rem;
+  }
+}
+
+.wordmark {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  color: var(--holding-ink);
+}
+
+.eyebrow {
+  margin-bottom: clamp(0.75rem, 2vh, 1.25rem);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--holding-muted);
+}
+
+.headline {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(
+    2.6rem,
+    min(8.5vw, 9.5vh),
+    5.75rem
+  ); /* the vh term keeps the whole column inside one screen on short windows */
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  max-width: 20ch;
+}
+
+.lead {
+  margin-top: clamp(1rem, 2.4vh, 1.5rem);
+  max-width: 34rem;
+  font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+  line-height: 1.5;
+  color: var(--holding-ink);
+}
+
+/* "Day N of construction": the true, moving fact. */
+.day-counter {
+  margin-top: clamp(1rem, 3vh, 2.25rem);
+}
+.day-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.day-word {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--holding-muted);
+}
+.day-number {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2.5rem, min(7vw, 7vh), 4.25rem);
+  line-height: 1;
+  color: var(--holding-accent);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.day-since {
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  color: var(--holding-muted);
+}
+
+.mission {
+  margin-top: clamp(1rem, 3vh, 2.25rem);
+  max-width: 36rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: var(--holding-muted);
+}
+
+/* Sign-up */
+.signup {
+  margin-top: clamp(1rem, 3vh, 2.25rem);
+  max-width: 34rem;
+}
+.signup-label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.signup-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+@media (min-width: 560px) {
+  .signup-row {
+    flex-direction: row;
+  }
+}
+.signup-input {
+  flex: 1;
+  min-height: 3rem; /* >= 44px touch target */
+  padding: 0 1rem;
+  font: inherit;
+  color: var(--holding-ink);
+  background: rgb(246 236 218 / 0.08);
+  border: 1px solid rgb(246 236 218 / 0.55); /* 3:1+ against the dark ground */
+  border-radius: 0.375rem;
+}
+.signup-input::placeholder {
+  color: var(--holding-muted);
+  opacity: 1;
+}
+.signup-input[aria-invalid="true"] {
+  border-color: #ffb199;
+  border-width: 2px;
+}
+.signup-input:disabled {
+  opacity: 0.6;
+}
+.signup-button {
+  min-height: 3rem;
+  padding: 0 1.4rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--holding-bg);
+  background: var(--holding-accent);
+  border: 0;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+.signup-button:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+.signup-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.signup-feedback {
+  min-height: 1.5rem;
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+}
+.signup-error {
+  color: #ffc7b3;
+}
+.signup-ok {
+  color: #cfe8c4;
+}
+.signup-consent {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--holding-muted);
+}
+
+/* Off-screen, not display:none, so bots still find it. */
+.signup-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.text-link {
+  color: var(--holding-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.text-link:hover {
+  color: var(--holding-accent);
+}
+.nowrap {
+  white-space: nowrap;
+}
+
+/* Footer */
+.holding-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  padding: 1.25rem 1.5rem 1.75rem;
+  font-size: 0.85rem;
+  color: var(--holding-muted);
+  background: rgb(23 16 12 / 0.96);
+  border-top: 1px solid rgb(236 220 192 / 0.18);
+}
+@media (min-width: 640px) {
+  .holding-footer {
+    padding: 1.25rem 3rem 1.75rem;
+  }
+}
+@media (min-width: 1024px) {
+  .holding-footer {
+    padding: 1.25rem 5rem 1.75rem;
+  }
+}
+
+/* Accessibility */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 10;
+  padding: 0.75rem 1rem;
+  color: var(--holding-bg);
+  background: var(--holding-ink);
+  border-radius: 0.25rem;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+.holding :focus-visible {
+  outline: 3px solid var(--holding-accent);
+  outline-offset: 3px;
+}
+
+/* The building draws itself. Each part is a path with pathLength=1, so one rule fits all of them.
+   On a phone it sits right under the header, so it draws where people are looking. On a wide screen it rises
+   beside the text, on the ground line that runs along the top of the footer. */
+.elevation-wrap {
+  position: relative;
+  overflow: hidden;
+  margin-top: 1.5rem;
+  line-height: 0;
+}
+.elevation {
+  display: block;
+  position: relative;
+  left: 50%;
+  width: max(
+    100%,
+    700px
+  ); /* on a phone the wings run off the edge and the portico stays readable */
+  height: auto;
+  transform: translateX(-50%);
+  --stroke: 5;
+}
+@media (min-width: 640px) {
+  .elevation {
+    --stroke: 3.2;
+    width: max(100%, 900px);
+  }
+}
+@media (min-width: 1280px) {
+  /* Side by side only when the column and the building cannot touch: text ends near x = 640, so the building
+     takes whatever is left of the viewport. Narrower screens keep the stacked layout. */
+  .elevation-wrap {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    width: clamp(520px, calc(100vw - 660px), 1020px);
+    margin-top: 0;
+    overflow: visible;
+  }
+  .elevation {
+    left: auto;
+    width: 100%;
+    transform: none;
+    --stroke: 2.4;
+  }
+}
+
+/* A short laptop window (e.g. 1366x768 with browser chrome): drop the mission so the building stays in view.
+   The mission is on the About page; it is a nicety here, not the point. */
+@media (min-width: 1280px) and (max-height: 760px) {
+  .mission {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+}
+
+.elev-line {
+  fill: none;
+  stroke: var(--holding-line);
+  stroke-width: var(--stroke);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0; /* the finished state: what you see with no animation */
+  animation: elev-draw var(--dur) cubic-bezier(0.45, 0.05, 0.25, 1) var(--delay) backwards;
+}
+.elev-ground {
+  stroke: url(#elev-ground-fade);
+}
+.elev-tinted {
+  fill: var(--holding-line);
+  fill-opacity: 0.06;
+  animation:
+    elev-draw var(--dur) cubic-bezier(0.45, 0.05, 0.25, 1) var(--delay) backwards,
+    elev-tint 1.2s ease 1.7s backwards;
+}
+@keyframes elev-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes elev-tint {
+  from {
+    fill-opacity: 0;
+  }
+  to {
+    fill-opacity: 0.06;
+  }
+}
+
+/* Text rises gently as the page opens. */
+.reveal {
+  animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s) backwards;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .elev-line,
+  .elev-tinted,
+  .reveal {
+    animation: none;
+  }
+  .signup-button {
+    transition: none;
+  }
+}

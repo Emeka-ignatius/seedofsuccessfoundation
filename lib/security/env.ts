@@ -8,8 +8,14 @@ const schema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   // Free text on purpose: lib/security/site-mode.ts decides what it means, and fails closed.
   SITE_MODE: z.string().optional(),
-  // Required from Phase 0 onwards, once Prisma and Neon are connected.
-  DATABASE_URL: z.string().url().optional(),
+  // Neon Postgres. Migrations use the direct URL; Vercel runtime should use the pooled one.
+  DATABASE_URL: z.url().optional(),
+  // Keys the HMAC that turns a client address into a rate-limit key, so no raw IP is stored. 32+ chars, random.
+  RATE_LIMIT_SECRET: z.string().min(32).optional(),
+  // Cloudflare Turnstile. The site key is public by design (it is embedded in the page); the secret key is not.
+  // Features that need these fail CLOSED when they are absent: sign-up is disabled, never un-protected.
+  TURNSTILE_SITE_KEY: z.string().min(1).optional(),
+  TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
 });
 
 export type ServerEnv = z.infer<typeof schema>;

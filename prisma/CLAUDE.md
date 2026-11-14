@@ -41,3 +41,4 @@ Idempotent webhook insert; Gift Aid snapshot immutability; encryption round-trip
 
 - 2026-11-14 — Created in Phase F, before the first migration.
 - 2026-11-14 — Draft schema proposed: `subscribers`, `rate_limit_buckets` (Phase 0). `prisma.config.ts` added to this area. Awaiting approval; not applied to any database.
+- 2026-11-14 — Approved by Fusco and applied: `20261114074804_init` (`subscribers`, `rate_limit_buckets`) to the London Neon database (`sosf`). Subscriber retention period still TBD with the client.

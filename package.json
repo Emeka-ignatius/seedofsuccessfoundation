@@ -10,6 +10,9 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:strict": "vitest run tests/strict",
+    "test:db": "node scripts/run-with-env.mjs RUN_DB_TESTS=1 -- vitest run tests/strict/rate-limit.test.ts",
+    "launch:check": "node scripts/run-with-env.mjs LAUNCH_CHECK=1 -- vitest run tests/launch",
+    "media:holding": "node scripts/media/holding.mjs",
     "e2e": "playwright test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -40,6 +43,7 @@
     "eslint-config-next": "16.4.6",
     "prettier": "^3.10.1",
     "prisma": "7.10.1",
+    "sharp": "0.35.5",
     "tailwindcss": "4.3.3",
     "typescript": "^5",
     "vitest": "^5.1.0"
