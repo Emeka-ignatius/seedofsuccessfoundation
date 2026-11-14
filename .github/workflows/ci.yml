@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the protected-path check walks commit history
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Dependency audit
+        run: pnpm audit --audit-level=high
+
+      - name: CODEOWNERS up to date
+        run: pnpm codeowners:check
+
+      - name: Protected paths have a human approval trailer
+        if: github.event_name == 'pull_request'
+        run: node scripts/protected/check.mjs --range "origin/${{ github.base_ref }}..HEAD"

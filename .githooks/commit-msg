@@ -1,0 +1,3 @@
+#!/bin/sh
+# Enabled by `pnpm prepare` (git config core.hooksPath .githooks).
+exec node scripts/protected/check.mjs --commit-msg "$1"

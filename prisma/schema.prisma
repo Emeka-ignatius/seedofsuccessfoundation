@@ -1,0 +1,41 @@
+// PROPOSED for Phase 0. Strict area: see prisma/CLAUDE.md. Not applied to any database until approved.
+// Phase 0 needs only the email capture and the rate limiter. The rest of the PRD §8.1 model plus the
+// gap tables from docs/IMPLEMENTATION_PLAN.md §4 arrive in Phase 2, each as a reviewed migration.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// Email capture from the holding page, and later the live site's newsletter field.
+/// Personal data. See prisma/DATA_INVENTORY.md.
+model Subscriber {
+  id          String    @id @default(cuid())
+  /// Stored lower-cased and trimmed by the application. Unique so a repeat signup is a quiet no-op.
+  email       String    @unique
+  /// The exact consent wording shown beside the field, kept verbatim like a Gift Aid declaration.
+  consentText String
+  consentedAt DateTime  @default(now())
+  /// Where it came from: "holding-page", later "home", "footer".
+  source      String
+  /// Set when double opt-in is added. Null means unconfirmed.
+  confirmedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@map("subscribers")
+}
+
+/// Fixed-window counters for rate limiting (plan D5). The key is an HMAC of the client address plus the
+/// action, so no raw IP address is stored. Rows are disposable and purged once their window has passed.
+model RateLimitBucket {
+  key         String   @id
+  count       Int
+  windowStart DateTime
+
+  @@index([windowStart])
+  @@map("rate_limit_buckets")
+}
