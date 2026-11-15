@@ -191,93 +191,17 @@
   color: var(--holding-muted);
 }
 
-/* Sign-up */
-.signup {
+/* Sign-up: layout and rules are in signup.css; this supplies the dark-ground colours. */
+.holding .signup {
+  --su-ink: var(--holding-ink);
+  --su-muted: var(--holding-muted);
+  --su-field-bg: rgb(246 236 218 / 0.08);
+  --su-field-border: rgb(246 236 218 / 0.55);
+  --su-button-bg: var(--holding-accent);
+  --su-button-ink: var(--holding-bg);
+  --su-error: #ffc7b3;
+  --su-ok: #cfe8c4;
   margin-top: clamp(1rem, 3vh, 2.25rem);
-  max-width: 34rem;
-}
-.signup-label {
-  display: block;
-  margin-bottom: 0.6rem;
-  font-size: 1rem;
-  font-weight: 500;
-}
-.signup-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-@media (min-width: 560px) {
-  .signup-row {
-    flex-direction: row;
-  }
-}
-.signup-input {
-  flex: 1;
-  min-height: 3rem; /* >= 44px touch target */
-  padding: 0 1rem;
-  font: inherit;
-  color: var(--holding-ink);
-  background: rgb(246 236 218 / 0.08);
-  border: 1px solid rgb(246 236 218 / 0.55); /* 3:1+ against the dark ground */
-  border-radius: 0.375rem;
-}
-.signup-input::placeholder {
-  color: var(--holding-muted);
-  opacity: 1;
-}
-.signup-input[aria-invalid="true"] {
-  border-color: #ffb199;
-  border-width: 2px;
-}
-.signup-input:disabled {
-  opacity: 0.6;
-}
-.signup-button {
-  min-height: 3rem;
-  padding: 0 1.4rem;
-  font: inherit;
-  font-weight: 600;
-  color: var(--holding-bg);
-  background: var(--holding-accent);
-  border: 0;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition: filter 0.15s ease;
-}
-.signup-button:hover:not(:disabled) {
-  filter: brightness(1.08);
-}
-.signup-button:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
-
-.signup-feedback {
-  min-height: 1.5rem;
-  margin-top: 0.6rem;
-  font-size: 0.95rem;
-}
-.signup-error {
-  color: #ffc7b3;
-}
-.signup-ok {
-  color: #cfe8c4;
-}
-.signup-consent {
-  margin-top: 0.4rem;
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: var(--holding-muted);
-}
-
-/* Off-screen, not display:none, so bots still find it. */
-.signup-trap {
-  position: absolute;
-  left: -10000px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
 }
 
 .text-link {

@@ -1,0 +1,1217 @@
+/* The full site (Phase 1, second pass). All class names are prefixed `sx-` so nothing collides with the holding
+   page's global rules, which ship in the same bundle. Colours and spacing come from the tokens in app/globals.css.
+
+   The direction: a parish newsletter set by a good printer. Deep cream paper with a faint grain, hairline rules,
+   Roman-numeral section numbering, serif display type with tight tracking, vivid red-earth numerals, one dark
+   forest-green ground (the "seed"), gold only on dark grounds, and the hospital's own line drawing as the one
+   recurring illustration. Deliberately NOT the SaaS/glass aesthetic (plan D8). */
+
+html:has(.sx) {
+  scroll-padding-top: 5.5rem; /* anchors land clear of the sticky header */
+}
+
+.sx {
+  position: relative;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+/* Paper grain: decorative warmth only (4%), fixed so it reads as the sheet, not the content. */
+.sx::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media print {
+  .sx::after {
+    display: none;
+  }
+}
+
+:where(.sx a) {
+  color: inherit; /* zero specificity, so .sx-link and the buttons can colour themselves */
+}
+.sx ::selection {
+  background: var(--earth);
+  color: #fff;
+}
+.sx :focus-visible {
+  outline: 3px solid var(--earth);
+  outline-offset: 3px;
+}
+.sx .sx-night :focus-visible,
+.sx .sx-forest :focus-visible,
+.sx .sx-pray :focus-visible,
+.sx .sx-footer :focus-visible {
+  outline-color: var(--gold);
+}
+
+.sx-wrap {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.sx-nowrap {
+  white-space: nowrap;
+}
+.sx-small {
+  font-size: 0.9rem;
+  color: var(--ink-2);
+}
+.sx-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Type ----------------------------------------------------------------------------------------------------- */
+.sx-h1,
+.sx-h2,
+.sx-h3 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  text-wrap: balance;
+}
+.sx-h1 {
+  font-size: clamp(2.8rem, 1.5rem + 5.4vw, 5.9rem);
+  line-height: 0.99;
+  letter-spacing: -0.022em;
+}
+.sx-h1 em,
+.sx-h2 em {
+  font-style: italic;
+  color: var(--earth);
+}
+.sx-h2 {
+  font-size: clamp(2.1rem, 1.4rem + 2.8vw, 3.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.018em;
+  max-width: 24ch;
+}
+.sx-h3 {
+  font-size: 1.7rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.sx-lead {
+  margin-top: var(--s-3);
+  max-width: 36rem;
+  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.3rem);
+  line-height: 1.55;
+}
+.sx-section :where(p + p) {
+  margin-top: var(--s-2);
+}
+
+/* Section numbering: a Roman numeral, a small-caps label, and a hairline running to the margin. */
+.sx-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: var(--s-3);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.sx-eyebrow::after {
+  content: "";
+  flex: 1;
+  min-width: 2rem;
+  height: 1px;
+  background: var(--rule);
+}
+.sx-no {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-size: 1.55rem;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--earth);
+  translate: 0 -1px;
+}
+
+.sx-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem; /* >= 44px touch target for a standalone link */
+  font-weight: 600;
+  color: var(--earth);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 1px;
+}
+.sx-link:hover {
+  color: var(--earth-hover);
+  text-decoration-thickness: 2px;
+}
+
+/* Grounds -------------------------------------------------------------------------------------------------- */
+.sx-section {
+  padding-block: clamp(3.5rem, 2rem + 6vw, 7.5rem);
+}
+.sx-alt {
+  background: var(--paper-2);
+}
+.sx-night {
+  background: var(--night);
+  color: var(--night-ink);
+}
+.sx-forest {
+  background: var(--forest);
+  color: var(--night-ink);
+}
+.sx-night .sx-eyebrow,
+.sx-forest .sx-eyebrow {
+  color: var(--night-ink-2);
+}
+.sx-night .sx-eyebrow::after,
+.sx-forest .sx-eyebrow::after {
+  background: var(--rule-night);
+}
+.sx-night .sx-no,
+.sx-forest .sx-no {
+  color: var(--gold);
+}
+.sx-night .sx-lead,
+.sx-forest .sx-lead {
+  color: var(--night-ink-2);
+}
+.sx-night .sx-link,
+.sx-forest .sx-link,
+.sx-pray .sx-link {
+  color: var(--gold);
+}
+.sx-night .sx-link:hover,
+.sx-forest .sx-link:hover,
+.sx-pray .sx-link:hover {
+  color: var(--night-ink);
+}
+.sx-night .sx-pending,
+.sx-forest .sx-pending {
+  color: var(--night-ink-2);
+  border-color: var(--night-ink-2);
+}
+
+/* Buttons -------------------------------------------------------------------------------------------------- */
+.sx-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem; /* >= 44px touch target */
+  padding: 0 1.6rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius);
+  border: 1.5px solid transparent;
+  transition:
+    background-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out);
+}
+.sx-btn-compact {
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+}
+.sx a.sx-btn-primary {
+  color: #fff;
+  background: var(--earth);
+}
+.sx a.sx-btn-primary:hover {
+  background: var(--earth-hover);
+}
+.sx a.sx-btn-ghost {
+  color: var(--earth);
+  border-color: var(--earth);
+}
+.sx a.sx-btn-ghost:hover {
+  background: var(--paper-2);
+}
+.sx .sx-night a.sx-btn-primary,
+.sx .sx-forest a.sx-btn-primary {
+  color: var(--night);
+  background: var(--gold);
+}
+.sx .sx-night a.sx-btn-primary:hover,
+.sx .sx-forest a.sx-btn-primary:hover {
+  background: var(--night-ink);
+}
+.sx-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-4);
+}
+
+/* Skip link and header ------------------------------------------------------------------------------------- */
+.sx-skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 90;
+  padding: 0.75rem 1rem;
+  color: var(--paper);
+  background: var(--ink);
+  border-radius: var(--radius);
+}
+.sx-skip:focus {
+  top: 1rem;
+}
+
+.sx-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgb(247 241 229 / 0.97);
+  border-bottom: 1px solid var(--rule);
+}
+.sx-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  min-height: 4.5rem;
+}
+.sx-wordmark {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.2rem;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+.sx-nav {
+  display: none;
+}
+.sx-nav ul,
+.sx-menu-panel ul,
+.sx-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sx-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.sx-menu {
+  position: relative;
+}
+/* An icon-only button (named "Menu" for assistive technology) so the wordmark keeps room beside Donate on a phone. */
+.sx-menu summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem; /* >= 44px touch target */
+  height: 2.75rem;
+  cursor: pointer;
+  list-style: none;
+  border: 1.5px solid var(--ink-2);
+  border-radius: var(--radius);
+}
+.sx-menu summary::-webkit-details-marker {
+  display: none;
+}
+.sx-menu[open] summary {
+  background: var(--paper-2);
+}
+.sx-menu-icon,
+.sx-menu-icon::before,
+.sx-menu-icon::after {
+  display: block;
+  width: 1.1rem;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 1px;
+}
+.sx-menu-icon {
+  position: relative;
+}
+.sx-menu-icon::before,
+.sx-menu-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+.sx-menu-icon::before {
+  top: -0.36rem;
+}
+.sx-menu-icon::after {
+  top: 0.36rem;
+}
+.sx-menu-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.5rem);
+  min-width: 13rem;
+  padding: 0.5rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.sx-menu-panel a {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 0.75rem;
+  text-decoration: none;
+  border-radius: var(--radius);
+}
+.sx-menu-panel a:hover {
+  background: var(--paper-2);
+}
+@media (min-width: 900px) {
+  .sx-nav {
+    display: block;
+  }
+  .sx-nav ul {
+    display: flex;
+    gap: var(--s-4);
+  }
+  .sx-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+  }
+  .sx-nav a:hover {
+    border-bottom-color: var(--earth);
+  }
+  .sx-menu {
+    display: none;
+  }
+}
+
+/* Dateline and hero ---------------------------------------------------------------------------------------- */
+/* A newspaper dateline under the masthead: where, and under what registration. */
+.sx-dateline {
+  border-bottom: 1px solid var(--rule);
+}
+.sx-dateline-in {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.3rem var(--s-4);
+  padding-block: 0.65rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.sx-hero {
+  padding-block: 0 clamp(3rem, 2rem + 5vw, 6rem);
+}
+.sx-hero-grid {
+  display: grid;
+  gap: var(--s-6);
+  align-items: center;
+  padding-top: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+}
+@media (min-width: 900px) {
+  .sx-hero-grid {
+    grid-template-columns: 1.12fr 0.88fr;
+    gap: var(--s-8);
+  }
+}
+.sx-hero .sx-h1 {
+  max-width: 13ch;
+}
+
+/* A chapel window: double-ruled arched frame with a keystone. */
+.sx-arch-figure {
+  width: min(100%, 27rem);
+  justify-self: center;
+}
+@media (min-width: 900px) {
+  .sx-arch-figure {
+    justify-self: end;
+  }
+}
+.sx-arch {
+  position: relative;
+  padding: 0.6rem;
+  border: 1px solid var(--earth);
+  outline: 1px solid var(--rule);
+  outline-offset: 4px;
+  border-radius: 999px 999px 0 0;
+}
+.sx-arch::after {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  translate: -50% 0;
+  rotate: 45deg;
+  background: var(--earth);
+}
+.sx-arch-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--paper-2);
+  border-radius: 999px 999px 0 0;
+}
+.sx-arch-img,
+.sx-cover {
+  object-fit: cover;
+}
+.sx-arch-img {
+  object-position: 38% 50%;
+}
+.sx-arch-figure figcaption {
+  padding-top: var(--s-3);
+}
+
+/* Day counter ---------------------------------------------------------------------------------------------- */
+.sx-day-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.sx-day-word {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.sx-day-number {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2.5rem, 2rem + 2vw, 3.75rem);
+  line-height: 1;
+  color: var(--earth);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.sx-day-since {
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+  color: var(--ink-2);
+}
+
+/* The need ------------------------------------------------------------------------------------------------- */
+.sx-need-grid {
+  display: grid;
+  gap: var(--s-4);
+}
+@media (min-width: 1024px) {
+  .sx-need-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: var(--s-8);
+    align-items: end;
+  }
+}
+.sx-need-head {
+  max-width: 26ch;
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.3rem);
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.sx-bignum {
+  display: block;
+  margin-bottom: var(--s-2);
+  font-style: italic;
+  font-size: clamp(4rem, 2.2rem + 10vw, 10.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--earth);
+}
+.sx-need-list {
+  display: grid;
+  gap: var(--s-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sx-need-list li {
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--earth);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.sx-need-grid + .sx-pending,
+.sx-need-grid + .sx-small {
+  margin-top: var(--s-6);
+}
+
+/* Two Communities ------------------------------------------------------------------------------------------ */
+.sx-tc-head .sx-h2 {
+  max-width: 20ch;
+}
+.sx-balance-wrap {
+  margin-top: var(--s-6);
+  /* On a phone the drawing is wider than the screen: only its middle shows. `clip`, not `hidden`: hidden would make
+     this a scroll container and the scroll-driven animation inside would measure against it instead of the page. */
+  overflow: clip;
+}
+.sx-balance {
+  display: block;
+  width: 150%;
+  height: auto;
+  margin-left: -25%; /* shows the middle two-thirds of the drawing (x 200 to 1000): both pans, whole and centred */
+  color: var(--night-ink-2);
+}
+@media (min-width: 768px) {
+  .sx-balance {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+.sx-b-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke; /* keeps the line weight steady as the drawing scales down on a phone */
+}
+.sx-b-beam {
+  stroke-width: 3px;
+}
+.sx-b-pivot {
+  fill: var(--gold);
+}
+.sx-balance-light .sx-balance {
+  color: var(--ink-2);
+}
+.sx-balance-light .sx-b-pivot {
+  fill: var(--earth);
+}
+.sx-tc-grid {
+  display: grid;
+  gap: var(--s-6);
+  margin-top: var(--s-2);
+}
+@media (min-width: 768px) {
+  .sx-tc-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+  }
+  .sx-tc-panel {
+    text-align: center;
+  }
+  .sx-tc-panel > p {
+    margin-inline: auto;
+  }
+  .sx-tc-grid .sx-dioceses {
+    justify-content: center;
+  }
+}
+.sx-tc-panel > p {
+  max-width: 28rem;
+  line-height: 1.6;
+}
+.sx-tc-panel .sx-h3 {
+  margin-bottom: var(--s-2);
+}
+.sx-dioceses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.6rem; /* no separators: a dot would land at the start of a wrapped line */
+  margin: var(--s-3) 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-size: 1.15rem;
+}
+.sx-tc .sx-dioceses {
+  color: var(--gold);
+}
+.sx-tc-more {
+  margin-top: var(--s-4);
+  text-align: center;
+}
+
+/* The beam rocks and settles level as the section scrolls into view. Browsers without scroll-driven animation (and
+   reduced-motion visitors) see it level, which is the finished state. */
+.sx-beam,
+.sx-pan {
+  transform-box: view-box;
+}
+.sx-beam {
+  transform-origin: 600px 100px;
+}
+.sx-pan {
+  transform-origin: 0 0;
+}
+@keyframes sx-settle {
+  0% {
+    transform: rotate(-5deg);
+  }
+  18% {
+    transform: rotate(3.2deg);
+  }
+  36% {
+    transform: rotate(-1.8deg);
+  }
+  54% {
+    transform: rotate(1deg);
+  }
+  72% {
+    transform: rotate(-0.4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes sx-settle-inverse {
+  0% {
+    transform: rotate(5deg);
+  }
+  18% {
+    transform: rotate(-3.2deg);
+  }
+  36% {
+    transform: rotate(1.8deg);
+  }
+  54% {
+    transform: rotate(-1deg);
+  }
+  72% {
+    transform: rotate(0.4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .sx-beam {
+      animation: sx-settle linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 40%;
+    }
+    .sx-pan {
+      animation: sx-settle-inverse linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 40%;
+    }
+  }
+}
+
+/* Build progress ------------------------------------------------------------------------------------------- */
+.sx-build-grid {
+  display: grid;
+  gap: var(--s-6);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .sx-build-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: var(--s-8);
+  }
+}
+.sx-build-grid .sx-day {
+  margin-top: var(--s-4);
+}
+.sx-build-grid .sx-link {
+  margin-top: var(--s-1);
+}
+.sx-build-frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+.sx-build-photo figcaption {
+  margin-top: var(--s-1);
+  font-size: 0.9rem;
+  color: var(--ink-2);
+}
+.sx-timeline {
+  display: grid;
+  gap: var(--s-3);
+  margin: var(--s-8) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.sx-timeline li {
+  position: relative;
+  padding-left: var(--s-4);
+  border-left: 1px solid var(--earth);
+}
+.sx-timeline li::before {
+  content: "";
+  position: absolute;
+  left: -0.4rem;
+  top: 0.35rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--earth);
+}
+.sx-timeline .sx-tl-current::before {
+  background: var(--earth);
+}
+.sx-tl-when {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.sx-tl-what {
+  margin-top: 0.25rem;
+  line-height: 1.5;
+}
+@media (min-width: 1024px) {
+  .sx-timeline {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--s-3);
+  }
+  .sx-timeline li {
+    padding: var(--s-3) 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--earth);
+  }
+  .sx-timeline li::before {
+    left: 0;
+    top: -0.45rem;
+  }
+}
+
+/* Editorial rows: an index, not a wall of cards (our work; give / fundraise / volunteer) -------------------- */
+.sx-rows {
+  margin-top: var(--s-6);
+  border-top: 1px solid var(--rule);
+}
+.sx-row {
+  display: grid;
+  gap: var(--s-2) var(--s-6);
+  padding-block: var(--s-4);
+  border-bottom: 1px solid var(--rule);
+}
+@media (min-width: 900px) {
+  .sx-row {
+    grid-template-columns: 7rem minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+  .sx-row-single {
+    grid-template-columns: 7rem minmax(0, 1fr);
+  }
+}
+.sx-row-no {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2.2rem, 1.6rem + 2vw, 3.4rem);
+  line-height: 0.9;
+  color: var(--earth);
+}
+.sx-row-main .sx-h3 {
+  margin-bottom: var(--s-1);
+}
+.sx-row-main p {
+  max-width: 34rem;
+}
+.sx-row-main .sx-link {
+  margin-top: var(--s-1);
+}
+.sx-row-label {
+  margin-bottom: var(--s-1);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.sx-ticks {
+  display: grid;
+  gap: 0.35rem var(--s-3);
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sx-ticks li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+.sx-ticks li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--palm);
+}
+@media (max-width: 420px) {
+  .sx-ticks {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Prayer: first, and set apart on the green ground --------------------------------------------------------- */
+.sx-pray {
+  margin-top: var(--s-6);
+  padding: clamp(2.5rem, 1.5rem + 4vw, 4.5rem) var(--s-4);
+  text-align: center;
+  background: var(--forest);
+  color: var(--night-ink);
+  border-radius: var(--radius);
+}
+.sx-pray-cross {
+  display: block;
+  width: 1.4rem;
+  height: auto;
+  margin: 0 auto var(--s-3);
+  color: var(--gold);
+}
+.sx-pray-kicker {
+  margin-bottom: var(--s-2);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--night-ink-2);
+}
+.sx-pray-quote {
+  max-width: 22ch;
+  margin: 0 auto var(--s-3);
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.9rem, 1.3rem + 2.6vw, 3.2rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.sx-pray > p:not(.sx-pray-quote):not(.sx-pray-kicker) {
+  max-width: 34rem;
+  margin-inline: auto;
+  color: var(--night-ink-2);
+}
+.sx-pray .sx-link {
+  margin-top: var(--s-2);
+}
+
+/* Voices and the "awaiting" marker ------------------------------------------------------------------------- */
+.sx-voices {
+  display: grid;
+  gap: var(--s-4);
+  margin-top: var(--s-6);
+}
+@media (min-width: 768px) {
+  .sx-voices {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.sx-quote blockquote {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-size: 1.45rem;
+  line-height: 1.4;
+}
+.sx-quote figcaption {
+  margin-top: var(--s-2);
+  color: var(--ink-2);
+}
+.sx-pending {
+  margin-top: var(--s-3);
+  padding: var(--s-2) var(--s-3);
+  font-size: 0.95rem;
+  color: var(--ink-2);
+  border: 1.5px dashed var(--ink-2);
+  border-radius: var(--radius);
+}
+.sx-voices .sx-pending {
+  position: relative;
+  min-height: 9rem;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: var(--s-6);
+}
+.sx-voices .sx-pending::before {
+  content: "\201C";
+  position: absolute;
+  top: 0.4rem;
+  left: 1.1rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 3.2rem;
+  line-height: 1;
+  color: var(--rule);
+}
+
+/* Trust row ------------------------------------------------------------------------------------------------ */
+.sx-trust {
+  padding-block: var(--s-4);
+  border-block: 1px solid var(--rule);
+  background: var(--paper);
+}
+.sx-trust-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem var(--s-4);
+  text-align: center;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* Newsletter: a framed clipping ---------------------------------------------------------------------------- */
+.sx-newsletter {
+  --su-ink: var(--ink);
+  --su-muted: var(--ink-2);
+  --su-field-bg: #fff;
+  --su-field-border: var(--ink-2);
+  --su-button-bg: var(--earth);
+  --su-button-ink: #fff;
+  --su-error: #a3260a;
+  --su-ok: var(--palm);
+  --su-hover: 0.88;
+  --su-radius: var(--radius);
+}
+.sx-frame {
+  padding: clamp(1.75rem, 1rem + 3vw, 3.5rem);
+  background: var(--paper);
+  border: 1px solid var(--earth);
+  outline: 1px solid var(--rule);
+  outline-offset: 5px;
+}
+.sx-newsletter-inner {
+  display: grid;
+  gap: var(--s-4);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .sx-newsletter-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+  }
+}
+.sx-newsletter .signup {
+  margin-top: 0;
+}
+.sx-newsletter .text-link {
+  color: var(--earth);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* Final call to action, with the building at its foot ------------------------------------------------------ */
+.sx-final {
+  text-align: center;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+.sx-final .sx-h2,
+.sx-final .sx-lead {
+  margin-inline: auto;
+}
+.sx-final .sx-actions {
+  justify-content: center;
+}
+.sx-final .sx-pending {
+  max-width: 36rem;
+  margin-inline: auto;
+}
+.sx-final-art {
+  margin-top: clamp(3rem, 2rem + 4vw, 5rem);
+}
+.sx-elev {
+  display: block;
+  width: min(68rem, 92%);
+  height: auto;
+  margin-inline: auto;
+  color: var(--night-ink);
+  opacity: 0.5;
+  translate: 0 2px; /* the ground line sits on the section edge */
+}
+.sx-elev path {
+  vector-effect: non-scaling-stroke;
+}
+
+/* Footer --------------------------------------------------------------------------------------------------- */
+.sx-footer {
+  padding-block: var(--s-6) var(--s-4);
+  color: var(--night-ink-2);
+  background: var(--night);
+  border-top: 1px solid var(--rule-night);
+}
+.sx-footer-grid {
+  display: grid;
+  gap: var(--s-4);
+}
+@media (min-width: 768px) {
+  .sx-footer-grid {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+}
+.sx-footer p + p {
+  margin-top: 0.35rem;
+}
+.sx-footer-name {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.2rem;
+  color: var(--night-ink);
+}
+.sx-footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem; /* >= 44px touch target */
+  color: var(--night-ink);
+  text-underline-offset: 0.2em;
+}
+.sx-footer a:hover {
+  color: var(--gold);
+}
+.sx-footer-legal a + a {
+  margin-left: var(--s-3);
+}
+
+/* About page ----------------------------------------------------------------------------------------------- */
+.sx-page-head {
+  padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem) clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+}
+.sx-page-head .sx-h1 {
+  max-width: 16ch;
+  font-size: clamp(2.6rem, 1.6rem + 3.8vw, 4.8rem);
+}
+.sx-story-grid {
+  display: grid;
+  gap: var(--s-6);
+  margin-top: var(--s-4);
+}
+@media (min-width: 768px) {
+  .sx-story-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+  }
+}
+.sx-story-grid article > p {
+  max-width: 30rem;
+}
+.sx-story-grid .sx-h3 {
+  margin-bottom: var(--s-2);
+}
+.sx-story-grid .sx-dioceses {
+  color: var(--earth);
+}
+.sx-mv {
+  display: grid;
+  gap: var(--s-4);
+  margin-top: var(--s-6);
+}
+@media (min-width: 768px) {
+  .sx-mv {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-6);
+  }
+}
+.sx-mv > div {
+  border-top: 2px solid var(--earth);
+  padding-top: var(--s-3);
+}
+.sx-mv .sx-h3 {
+  margin-bottom: var(--s-1);
+}
+.sx-mv p {
+  max-width: 32rem;
+}
+.sx-objectives {
+  max-width: 46rem;
+  margin: var(--s-6) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: obj;
+}
+.sx-objectives li {
+  counter-increment: obj;
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: var(--s-3);
+  align-items: baseline;
+  padding-block: var(--s-3);
+  border-top: 1px solid var(--rule);
+  font-size: 1.15rem;
+}
+.sx-objectives li::before {
+  content: counter(obj);
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--earth);
+}
+.sx-people {
+  display: grid;
+  gap: var(--s-4);
+  margin: var(--s-6) 0 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 900px) {
+  .sx-people {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.sx-people li {
+  border-top: 2px solid var(--earth);
+  padding-top: var(--s-2);
+}
+.sx-person-name {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+.sx-person-role {
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.sx-advisers {
+  margin-top: var(--s-6);
+}
+.sx-advisers-names {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-size: 1.15rem;
+}
+
+/* Motion --------------------------------------------------------------------------------------------------- */
+/* Opening rise (hero only): time-based, staggered by --d. */
+.sx-rise {
+  animation: sx-rise 0.9s var(--ease-out) var(--d, 0s) backwards;
+}
+@keyframes sx-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sx-rise {
+    animation: none;
+  }
+  .sx-btn {
+    transition: none;
+  }
+}

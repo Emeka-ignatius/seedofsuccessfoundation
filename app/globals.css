@@ -1,10 +1,58 @@
 @import "tailwindcss";
 
-/* Site-wide tokens. The holding page defines its own warm-dark palette in components/holding/holding.css;
-   the full site's palette is set in Phase 1, once the logo and brand colours arrive. */
+/* Design tokens for the full site (Phase 1, second pass). PROVISIONAL palette until the logo arrives: deep cream
+   paper, vivid red earth, dark forest green (the "seed"), gold on dark grounds only. Held in one place so the
+   logo's real colours replace it with a one-file change (PRD §5). Every text/background pairing the site uses is
+   checked against WCAG 2.2 AA by tests/unit/design-contrast.test.ts, which parses the hex values in this file:
+   change a colour here and that test tells you whether it still passes. (Hex, not oklch, for exactly that reason:
+   the test reads them; perceptual tuning is done by hand and proven by the test.)
+   The holding page keeps its own --holding-* tokens in components/holding/holding.css. */
 :root {
-  --background: #fbf7f0;
-  --foreground: #1f1813;
+  /* Surfaces */
+  --paper: #f7f1e5; /* page ground: deep cream, not white */
+  --paper-2: #efe5d2; /* alternate sections */
+  --night: #1d130b; /* dark sections, footer */
+  --forest: #1b3a2c; /* the green ground: Two Communities, prayer */
+
+  /* Text */
+  --ink: #241a11;
+  --ink-2: #554639; /* secondary text */
+  --night-ink: #f6ecda; /* text on night and forest */
+  --night-ink-2: #d3c4aa;
+
+  /* Brand (provisional) */
+  --earth: #a03d0e; /* red earth: links, primary buttons, big numerals. White text on it passes AA */
+  --earth-hover: #7e2f0b;
+  --palm: #2d4a3a; /* green as TEXT on light grounds (the prayer line) */
+  --gold: #d19a3f; /* accent on dark grounds ONLY: never text on paper (fails AA there) */
+
+  /* Lines. Decorative only: never the sole carrier of meaning, never text */
+  --rule: #d8c9ae;
+  --rule-night: rgb(236 220 192 / 0.22);
+
+  /* Spacing: 8px scale */
+  --s-1: 0.5rem;
+  --s-2: 1rem;
+  --s-3: 1.5rem;
+  --s-4: 2rem;
+  --s-6: 3rem;
+  --s-8: 4rem;
+  --s-12: 6rem;
+
+  /* Shape and depth: sharp print-like corners, one shadow */
+  --radius: 0.125rem;
+  --shadow: 0 1px 2px rgb(31 24 19 / 0.08), 0 10px 28px rgb(31 24 19 / 0.07);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur: 0.2s;
+
+  /* Layout */
+  --page-max: 80rem;
+  --gutter: clamp(1.25rem, 5vw, 3.5rem);
+
+  --background: var(--paper);
+  --foreground: var(--ink);
 }
 
 @theme inline {

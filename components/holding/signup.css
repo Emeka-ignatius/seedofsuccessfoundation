@@ -1,0 +1,96 @@
+/* Email sign-up form. Colours come from variables so the same form works on the dark holding page and on the light
+   site: each context sets --su-* on an ancestor (see `.holding .signup` in holding.css, `.sx-newsletter` in
+   components/site/site.css). Nothing here may hard-code a colour. */
+.signup {
+  max-width: 34rem;
+  color: var(--su-ink);
+}
+.signup-label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.signup-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+@media (min-width: 560px) {
+  .signup-row {
+    flex-direction: row;
+  }
+}
+.signup-input {
+  flex: 1;
+  min-height: 3rem; /* >= 44px touch target */
+  padding: 0 1rem;
+  font: inherit;
+  color: var(--su-ink);
+  background: var(--su-field-bg);
+  border: 1px solid var(--su-field-border); /* 3:1+ against the ground */
+  border-radius: var(--su-radius, 0.375rem);
+}
+.signup-input::placeholder {
+  color: var(--su-muted);
+  opacity: 1;
+}
+.signup-input[aria-invalid="true"] {
+  border-color: var(--su-error);
+  border-width: 2px;
+}
+.signup-input:disabled {
+  opacity: 0.6;
+}
+.signup-button {
+  min-height: 3rem;
+  padding: 0 1.4rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--su-button-ink);
+  background: var(--su-button-bg);
+  border: 0;
+  border-radius: var(--su-radius, 0.375rem);
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+.signup-button:hover:not(:disabled) {
+  filter: brightness(var(--su-hover, 1.08));
+}
+.signup-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.signup-feedback {
+  min-height: 1.5rem;
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+}
+.signup-error {
+  color: var(--su-error);
+}
+.signup-ok {
+  color: var(--su-ok);
+}
+.signup-consent {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--su-muted);
+}
+
+/* Off-screen, not display:none, so bots still find it. */
+.signup-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signup-button {
+    transition: none;
+  }
+}

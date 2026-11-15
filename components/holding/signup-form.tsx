@@ -4,6 +4,7 @@ import Link from "next/link";
 import Script from "next/script";
 import { useActionState, useEffect } from "react";
 import { subscribe, type SubscribeState } from "@/lib/subscribers/actions";
+import "./signup.css";
 
 const initialState: SubscribeState = { status: "idle", message: "", email: "" };
 
@@ -18,9 +19,18 @@ interface Props {
   turnstileSiteKey: string | undefined;
   /** The exact wording shown beside the button. The server stores the same constant, not what is posted. */
   consentText: string;
+  /** The visible question above the field. Defaults to the holding-page wording. */
+  label?: string;
+  /** Match the ground the form sits on, so the spam-check widget does not clash. */
+  theme?: "dark" | "light";
 }
 
-export function SignupForm({ turnstileSiteKey, consentText }: Props) {
+export function SignupForm({
+  turnstileSiteKey,
+  consentText,
+  label = "Be the first to know when we launch",
+  theme = "dark",
+}: Props) {
   const [state, formAction, pending] = useActionState(subscribe, initialState);
 
   // A Turnstile token is single use. After every attempt, ask for a fresh one.
@@ -34,7 +44,7 @@ export function SignupForm({ turnstileSiteKey, consentText }: Props) {
   return (
     <form action={formAction} className="signup" noValidate aria-describedby="signup-consent">
       <label htmlFor="signup-email" className="signup-label">
-        Be the first to know when we launch
+        {label}
       </label>
 
       <div className="signup-row">
@@ -71,7 +81,7 @@ export function SignupForm({ turnstileSiteKey, consentText }: Props) {
           <div
             className="cf-turnstile"
             data-sitekey={turnstileSiteKey}
-            data-theme="dark"
+            data-theme={theme}
             data-appearance="interaction-only"
             data-response-field-name="cf-turnstile-response"
           />
