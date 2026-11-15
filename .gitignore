@@ -50,3 +50,6 @@ next-env.d.ts
 
 # generated Prisma client (pnpm db:generate)
 /lib/generated/
+
+# client photo originals: personal data and unlicensed; kept locally, never committed or served (see lib/security/CLAUDE.md)
+/originals/

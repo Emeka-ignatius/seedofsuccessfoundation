@@ -11,8 +11,8 @@ import Image from "next/image";
 const SLIDES = [
   "/media/grove-1.jpg",
   "/media/grove-2.jpg",
-  "/media/grove-3.jpeg",
-  "/media/grove-4.jpeg",
+  "/media/grove-3.jpg",
+  "/media/grove-4.jpg",
   "/media/grove-5.jpg",
 ] as const;
 
