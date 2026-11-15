@@ -38,14 +38,14 @@ export function BuildProgress() {
           <figure className="sx-build-photo">
             <div className="sx-build-frame">
               <Image
-                src="/media/grove-4.jpg"
-                alt="Builders at work on the roof of St Perpetua Hospital, with bamboo scaffolding along the walls below."
+                src="/media/builders.jpg"
+                alt="Five builders in hard hats and high-visibility vests, standing together on the cleared site at Abajah."
                 fill
                 sizes="(max-width: 900px) 92vw, 46vw"
-                className="sx-cover"
+                className="sx-cover sx-cover-high"
               />
             </div>
-            <figcaption>Abajah, under construction.</figcaption>
+            <figcaption>The builders at the Abajah site.</figcaption>
             <Pending>a photograph dated this month, so visitors can see the build move.</Pending>
           </figure>
         </div>

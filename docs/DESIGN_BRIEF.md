@@ -54,7 +54,21 @@ Newsreader (serif) for headings, quotations and numerals: gravitas and a pastora
 
 ## Photography rules
 
-Orlu people as agents. No stock. No pity imagery. The building itself is the strongest trust signal: the hero is the hospital under scaffolding, framed as a chapel window, with the day count beneath it. Photographs of identifiable people appear only where the site owner has accepted the permission risk (see `components/holding/CLAUDE.md`). Originals live in `originals/` (gitignored); only resized, metadata-stripped derivatives are served from `public/media/`.
+Orlu people as agents. No stock. No pity imagery. The building itself is the strongest trust signal: the hero is the hospital under scaffolding, framed as a chapel window, with the day count beneath it. Originals live in `originals/` (gitignored); only resized, metadata-stripped derivatives are served from `public/media/` (`pnpm media:holding`).
+
+**Story plates in use** (chosen by the owner's direction, 2026-11-15, while client photo permissions and the Kay Images licence remain outstanding — tracker rows unchanged):
+
+| Frame                                   | Where                       | What it says              |
+| --------------------------------------- | --------------------------- | ------------------------- |
+| KAY_6248 (two priests, their bishop)    | About, opening the story    | The two churches together |
+| KAY_6451 (sisters at Mass)              | About, "Orlu gives England" | "...and sisters too"      |
+| KAY_6494 (UK group in the congregation) | About, "England gives Orlu" | England welcomed in Orlu  |
+| KAY_135 (aerial of the cleared land)    | About, plate row            | "Land was acquired"       |
+| KAY_5877 (blessing of the stone)        | About, plate row            | The foundation stone      |
+| KAY_5954 (dancers in red)               | About, plate row            | The welcome               |
+| KAY_5923 (five builders, hard hats)     | Home, "being built"         | Orlu people as agents     |
+
+**Not used anywhere:** outreach frames showing patients or children. They wait for explicit client permission; patients are a different category from clergy at a public ceremony. **Video:** the client's clips should go in `originals/video/` (never `public/`, never git — too heavy and unlicensed); web versions are produced when Phase 2 media storage exists.
 
 ## Content model: where each piece lives
 

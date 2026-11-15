@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { charity } from "@/lib/site/charity";
 import { aboutPage, dioceses, reciprocity, stewardship } from "@/lib/site/content";
@@ -37,11 +38,35 @@ export function About() {
           <h2 id="story-title" className="sx-h2">
             A see-saw, kept in <em>balance</em>.
           </h2>
+          <figure className="sx-plate sx-plate-wide">
+            <div className="sx-plate-frame">
+              <Image
+                src="/media/about-priests.jpg"
+                alt="Two priests in white vestments walking side by side outside the church in Orlu, their bishop behind them."
+                fill
+                sizes="(max-width: 900px) 92vw, 56rem"
+                className="sx-cover"
+              />
+            </div>
+            <figcaption>During the UK group&apos;s visit to Orlu.</figcaption>
+          </figure>
           <div className="sx-balance-wrap sx-balance-light">
             <Balance />
           </div>
           <div className="sx-story-grid">
             <article aria-labelledby="story-orlu">
+              <figure className="sx-plate">
+                <div className="sx-plate-frame">
+                  <Image
+                    src="/media/about-sisters.jpg"
+                    alt="Religious sisters in white and blue habits in the pews at Mass in Orlu."
+                    fill
+                    sizes="(max-width: 768px) 92vw, 44vw"
+                    className="sx-cover"
+                  />
+                </div>
+                <figcaption>And sisters too.</figcaption>
+              </figure>
               <h3 id="story-orlu" className="sx-h3">
                 Orlu gives England
               </h3>
@@ -55,6 +80,18 @@ export function About() {
               </ul>
             </article>
             <article aria-labelledby="story-england">
+              <figure className="sx-plate">
+                <div className="sx-plate-frame">
+                  <Image
+                    src="/media/about-guests.jpg"
+                    alt="Visitors from England, dressed in Nigerian fabrics, seated in the congregation at Mass in Orlu."
+                    fill
+                    sizes="(max-width: 768px) 92vw, 44vw"
+                    className="sx-cover"
+                  />
+                </div>
+                <figcaption>Welcomed into the congregation.</figcaption>
+              </figure>
               <h3 id="story-england" className="sx-h3">
                 England gives Orlu
               </h3>
@@ -67,6 +104,45 @@ export function About() {
                 </Link>
               </p>
             </article>
+          </div>
+
+          <div className="sx-plates">
+            <figure className="sx-plate">
+              <div className="sx-plate-frame">
+                <Image
+                  src="/media/about-land.jpg"
+                  alt="The cleared red-earth site at Abajah seen from above, palms at its edge and people gathered across it."
+                  fill
+                  sizes="(max-width: 900px) 92vw, 30vw"
+                  className="sx-cover"
+                />
+              </div>
+              <figcaption>The land at Abajah.</figcaption>
+            </figure>
+            <figure className="sx-plate">
+              <div className="sx-plate-frame">
+                <Image
+                  src="/media/about-stone.jpg"
+                  alt="The bishop at the blessing of the foundation stone, surrounded by clergy and visitors."
+                  fill
+                  sizes="(max-width: 900px) 92vw, 30vw"
+                  className="sx-cover"
+                />
+              </div>
+              <figcaption>The foundation stone is blessed.</figcaption>
+            </figure>
+            <figure className="sx-plate">
+              <div className="sx-plate-frame">
+                <Image
+                  src="/media/about-welcome.jpg"
+                  alt="Dancers in red and white leading the welcome at the Abajah site."
+                  fill
+                  sizes="(max-width: 900px) 92vw, 30vw"
+                  className="sx-cover"
+                />
+              </div>
+              <figcaption>The welcome at the site.</figcaption>
+            </figure>
           </div>
         </div>
       </section>

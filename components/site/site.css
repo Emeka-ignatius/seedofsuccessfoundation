@@ -1192,6 +1192,50 @@ html:has(.sx) {
   font-size: 1.15rem;
 }
 
+/* Story plates: photographs set like plates in a printed newsletter ---------------------------------------- */
+.sx-plate {
+  margin: 0;
+}
+.sx-plate-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+}
+.sx-plate figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
+.sx-plate-wide {
+  max-width: 56rem;
+  margin: var(--s-6) auto 0;
+}
+.sx-plate-wide .sx-plate-frame {
+  aspect-ratio: 5 / 3;
+}
+.sx-story-grid .sx-plate {
+  margin-bottom: var(--s-3);
+}
+.sx-plates {
+  display: grid;
+  gap: var(--s-4);
+  margin-top: var(--s-8);
+}
+@media (min-width: 900px) {
+  .sx-plates {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.sx-plates .sx-plate-frame {
+  aspect-ratio: 4 / 3;
+}
+.sx-cover-high {
+  object-position: 50% 38%; /* keeps faces in frame when the crop is tighter than the photograph */
+}
+
 /* Motion --------------------------------------------------------------------------------------------------- */
 /* Opening rise (hero only): time-based, staggered by --d. */
 .sx-rise {
