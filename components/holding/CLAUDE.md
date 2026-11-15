@@ -23,7 +23,8 @@ The background (`backdrop.tsx`) slowly crossfades between five photographs chose
 - **Adding or changing a frame:** put the source in `originals/`, edit the `GROVE` list in `scripts/media/holding.mjs`, run the script, then edit `SLIDES` in `backdrop.tsx`. The script needs the originals on your machine; a fresh clone does not have them.
 - **Pure CSS, written for exactly five layers.** `@keyframes backdrop-cycle` uses percentages derived from 5 layers x 9s. For a different count, change `--slot` and the percentages together (fade-in = 1/N of the cycle's fade share, hold through the next layer's fade-in). Layers are raised while they fade in so the first can fade over the last at the wrap; the backdrop is its own stacking context so this cannot cover the content.
 - **Reduced motion** shows the first photograph, still. No JavaScript is involved, so it cycles with JS off.
-- `holding-bg.jpg` is a palm-canopy strip (no people) read by the social-share image `app/opengraph-image.tsx`; it is not part of the rotation.
+- **The social-share card** (`app/opengraph-image.tsx`) deliberately has no photograph: it is a PNG, and with a photo it was 1.7 MB, which WhatsApp will not preview. Keep it under about 300 KB.
+- **Image `sizes`:** `backdrop.tsx` asks for `(max-width: 640px) 150vw, 100vw`. The old `250vw` made every device, phones included, download the 3840px version of all five photographs (about 1.6 MB).
 
 ## Colours and type
 

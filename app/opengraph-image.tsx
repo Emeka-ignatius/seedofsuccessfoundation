@@ -1,6 +1,4 @@
 import { ImageResponse } from "next/og";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ELEVATION_PARTS } from "@/components/holding/elevation-geometry";
 import { charity } from "@/lib/site/charity";
 
@@ -10,15 +8,10 @@ export const contentType = "image/png";
 
 // Shared when someone posts the link in a parish newsletter or WhatsApp group, so it has to look deliberate.
 // Rendered once at build time. Satori ships only a sans-serif; swap in Newsreader when the brand type is final.
-async function photoDataUri(): Promise<string> {
-  "use cache"; // a plain string, so it can be cached; this keeps the whole image static (built once, not per crawler)
-  const photo = await readFile(join(process.cwd(), "public", "media", "holding-bg.jpg"));
-  return `data:image/jpeg;base64,${photo.toString("base64")}`;
-}
-
-export default async function OpenGraphImage() {
-  const photoSrc = await photoDataUri();
-
+//
+// No photograph on purpose: the card is a PNG, and a photo made it 1.7 MB, which WhatsApp (and some other apps)
+// will not preview. Flat colour and line work keep it to tens of kilobytes. Keep it under about 300 KB.
+export default function OpenGraphImage() {
   return new ImageResponse(
     <div
       style={{
@@ -26,38 +19,17 @@ export default async function OpenGraphImage() {
         height: "100%",
         display: "flex",
         position: "relative",
-        background: "#17100c",
         color: "#f6ecda",
+        background:
+          "radial-gradient(90% 120% at 85% 110%, rgba(224,123,76,0.22), rgba(23,16,12,0) 60%), #17100c",
       }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={photoSrc}
-        alt=""
-        width={1200}
-        height={630}
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: 1200,
-          height: 630,
-          objectFit: "cover",
-          opacity: 0.45,
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(180deg, rgba(23,16,12,0.45), rgba(23,16,12,0.92))",
-        }}
-      />
-
+      {/* The building sits in the bottom-right corner at 45% scale, below and clear of the text block. */}
       <svg
-        width={1200}
-        height={360}
+        width={540}
+        height={162}
         viewBox="0 0 1200 360"
-        style={{ position: "absolute", left: 0, bottom: 0 }}
+        style={{ position: "absolute", right: 24, bottom: 0 }}
       >
         {ELEVATION_PARTS.map((p) => (
           <path
@@ -65,7 +37,7 @@ export default async function OpenGraphImage() {
             d={p.d}
             fill={p.tinted ? "rgba(236,220,192,0.07)" : "none"}
             stroke="#ecdcc0"
-            strokeWidth={2.4}
+            strokeWidth={5}
             strokeLinecap="round"
             strokeLinejoin="round"
           />

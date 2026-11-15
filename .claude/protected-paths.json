@@ -1,6 +1,6 @@
 {
   "$comment": "Single source of truth for strict areas. Read by .claude/hooks/guard.mjs, scripts/protected/check.mjs and scripts/protected/gen-codeowners.mjs. Editing this file is itself a protected change (area: governance).",
-  "owners": ["@REPLACE_WITH_GITHUB_HANDLE"],
+  "owners": ["@Emeka-ignatius"],
   "areas": [
     {
       "id": "auth",
