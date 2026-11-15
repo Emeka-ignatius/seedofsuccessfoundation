@@ -25,8 +25,12 @@ A parish newsletter set by a good printer, not the default "modern website" kit.
 
 ## Pages
 
-`shell.tsx` (`SiteShell`) wraps every page: skip link, sticky header, footer. Built: Home (`home.tsx`) and About (`about.tsx`, route `app/about/page.tsx`). Every route here is invisible in holding mode by the gate.
+`shell.tsx` (`SiteShell`) wraps every page: skip link, sticky header, footer; `page-head.tsx` opens inner pages. Built: Home (`home.tsx`), About (`about.tsx`), Our Work (`our-work.tsx`), the Hospital (`hospital.tsx`, with the dated build chronicle), Medical Outreach (`outreach.tsx`), Get Involved (`get-involved.tsx`) and Contact (`contact.tsx`), each with a route in `app/`. Every route is invisible in holding mode by the gate (a strict test finds routes automatically and proves it).
+
+## Forms and money are not here
+
+The contact form, prayer pledge and volunteer form need an `Enquiry` table (strict: `prisma/`), and `/donate` is strict (`app/donate`). Those pages show a `<Pending>` marker instead of a fake form. Do not build them without the owner's approval for that specific change (see `prisma/CLAUDE.md`).
 
 ## Not built yet
 
-Links to `/our-work/*`, `/get-involved`, `/donate`, `/contact`, `/terms` point at pages that arrive in Phase 2 and 3. In a live-mode preview they 404 for now.
+`/donate` (strict) and `/terms` (legal text, not ours to write) are linked from the header, hero and footer and 404 in a live-mode preview. `/our-work` pages are linked from Home and work.

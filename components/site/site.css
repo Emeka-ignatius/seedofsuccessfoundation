@@ -1156,20 +1156,31 @@ html:has(.sx) {
   color: var(--earth);
 }
 .sx-people {
-  display: grid;
-  gap: var(--s-4);
   margin: var(--s-6) 0 0;
   padding: 0;
   list-style: none;
 }
+/* One editorial row per trustee: name and role on the left, their own biography on the right. */
+.sx-person {
+  display: grid;
+  gap: var(--s-2) var(--s-6);
+  padding-block: var(--s-4);
+  border-top: 2px solid var(--earth);
+}
+.sx-person:last-child {
+  border-bottom: 1px solid var(--rule);
+}
 @media (min-width: 900px) {
-  .sx-people {
-    grid-template-columns: repeat(3, 1fr);
+  .sx-person {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
   }
 }
-.sx-people li {
-  border-top: 2px solid var(--earth);
-  padding-top: var(--s-2);
+.sx-person-bio p {
+  max-width: 38rem;
+  line-height: 1.6;
+}
+.sx-person-bio .sx-pending {
+  margin-top: 0;
 }
 .sx-person-name {
   font-family: var(--font-serif), Georgia, serif;
@@ -1234,6 +1245,219 @@ html:has(.sx) {
 }
 .sx-cover-high {
   object-position: 50% 38%; /* keeps faces in frame when the crop is tighter than the photograph */
+}
+
+/* Inner pages ---------------------------------------------------------------------------------------------- */
+.sx-feature {
+  display: grid;
+  gap: var(--s-6);
+  align-items: center;
+  padding-block: var(--s-6);
+}
+.sx-feature + .sx-feature {
+  border-top: 1px solid var(--rule);
+}
+@media (min-width: 900px) {
+  .sx-feature {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+  }
+}
+.sx-feature.sx-feature-flip {
+  grid-template-columns: 1fr; /* the outreach block has no photograph yet: full width, not half a page of blank */
+}
+.sx-feature-flip .sx-ticks {
+  max-width: 46rem;
+}
+.sx-feature .sx-row-no {
+  margin-bottom: var(--s-2);
+}
+.sx-feature .sx-ticks {
+  margin: var(--s-3) 0 var(--s-2);
+}
+.sx-plate-hero {
+  margin-top: 0;
+  max-width: 76rem;
+}
+.sx-plate-hero .sx-plate-frame {
+  aspect-ratio: 21 / 9;
+}
+.sx-plate-hero figcaption {
+  margin-top: var(--s-3);
+}
+
+/* A numbered list of services, set large. */
+.sx-services {
+  display: grid;
+  gap: 0 var(--s-6);
+  margin: var(--s-6) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: svc;
+}
+@media (min-width: 768px) {
+  .sx-services {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.sx-services li {
+  counter-increment: svc;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  padding-block: var(--s-2);
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+.sx-services li::before {
+  content: counter(svc, decimal-leading-zero);
+  flex: none;
+  min-width: 2.2rem;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--earth);
+}
+.sx-services-big li {
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.2rem);
+  padding-block: var(--s-3);
+}
+
+/* The dated build chronicle: a date, then what happened, then its photographs. */
+.sx-chron {
+  margin: var(--s-8) 0 var(--s-4);
+  padding: 0;
+  list-style: none;
+}
+.sx-chron > li {
+  display: grid;
+  gap: var(--s-2) var(--s-6);
+  padding-block: var(--s-4);
+  border-top: 1px solid var(--earth);
+}
+@media (min-width: 900px) {
+  .sx-chron > li {
+    grid-template-columns: 14rem minmax(0, 1fr);
+  }
+}
+.sx-chron-when {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  line-height: 1.15;
+  color: var(--earth);
+}
+.sx-chron-current .sx-chron-when::after {
+  content: "";
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-left: 0.6rem;
+  border-radius: 50%;
+  background: var(--earth);
+}
+.sx-chron-what {
+  max-width: 38rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+.sx-chron-plates {
+  display: grid;
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+}
+@media (min-width: 768px) {
+  .sx-chron-plates {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .sx-chron-plates.one {
+    grid-template-columns: minmax(0, 28rem);
+  }
+}
+.sx-chron-plates .sx-plate-frame {
+  aspect-ratio: 4 / 3;
+}
+
+/* Get involved */
+.sx-gi-pray {
+  padding-bottom: clamp(3.5rem, 2rem + 6vw, 7.5rem);
+}
+.sx-gi-grid {
+  display: grid;
+  gap: var(--s-6);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .sx-gi-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+  }
+}
+.sx-pray-left {
+  max-width: 18ch;
+  margin: 0;
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2rem, 1.3rem + 3vw, 3.6rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+.sx-gi-pray .sx-plate figcaption {
+  color: var(--night-ink-2);
+}
+.sx-gi-row {
+  display: grid;
+  gap: var(--s-2) var(--s-6);
+}
+@media (min-width: 900px) {
+  .sx-gi-row {
+    grid-template-columns: 7rem minmax(0, 1fr);
+  }
+}
+.sx-ethic {
+  max-width: 34rem;
+  margin: var(--s-4) 0 0;
+  padding: var(--s-3) var(--s-4);
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.4;
+  border-left: 3px solid var(--earth);
+}
+
+/* Contact */
+.sx-contact-grid {
+  display: grid;
+  gap: var(--s-6);
+}
+@media (min-width: 900px) {
+  .sx-contact-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+  }
+}
+.sx-contact-grid .sx-h3 {
+  margin-bottom: var(--s-2);
+}
+.sx-details {
+  display: grid;
+  gap: 0.25rem 0;
+  margin: 0;
+}
+.sx-details dt {
+  margin-top: var(--s-2);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.sx-details dd {
+  margin: 0;
+}
+.sx-details .sx-pending {
+  margin-top: 0.25rem;
 }
 
 /* Motion --------------------------------------------------------------------------------------------------- */

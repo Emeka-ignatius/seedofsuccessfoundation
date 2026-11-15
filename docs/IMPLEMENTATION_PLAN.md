@@ -223,6 +223,8 @@ Content per PRD §3A: dimmed Abajah build photo (compressed), "St Perpetua Hospi
 
 ### Phase 1 — Discovery, IA and visual design (Week 1)
 
+**Status (2026-11-15, later): inner pages built.** Our Work, Hospital (with the photographic build chronicle), Medical Outreach, Get Involved and Contact are in place beside Home and About, all behind the holding gate. Forms and `/donate` wait on strict-area approval. All open questions are in `reminder.md` (repository root).
+
 **Status (2026-11-15): second pass.** The first slice was judged generic by the owner, so Home was redesigned (print-newsletter language, forest-green ground, numbered editorial rows, the hospital line drawing as the recurring illustration) and the **About** page was built. Details in `docs/DESIGN_BRIEF.md`. The earlier status follows.
 
 **Status (2026-11-14): started; first slice built.** Chosen approach: design directly in the Next.js app (unlinked from production by the holding gate), with a **provisional** earth palette defined as swappable tokens. Done: design tokens plus a WCAG contrast test; shell (sticky header, footer); the full Home page, all ten sections, with the Two Communities see-saw as centrepiece; content model in `lib/site/content.ts` with visible "awaiting" markers and launch checks; axe, keyboard and responsive checks (360 to 1440px) clean; verified that production in `holding` mode is unchanged. Not yet: About, Hospital, Outreach, Get Involved, Donate flow wireframes, Contact, admin shell. See `docs/DESIGN_BRIEF.md`.

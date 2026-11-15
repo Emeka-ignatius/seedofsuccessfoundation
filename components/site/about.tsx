@@ -189,13 +189,22 @@ export function About() {
           </h2>
           <ul className="sx-people">
             {aboutPage.trustees.map((t) => (
-              <li key={t.name}>
-                <p className="sx-person-name">{t.name}</p>
-                <p className="sx-person-role">{t.role}</p>
+              <li key={t.name} className="sx-person">
+                <div>
+                  <p className="sx-person-name">{t.name}</p>
+                  <p className="sx-person-role">{t.role}</p>
+                </div>
+                <div className="sx-person-bio">
+                  {t.bio ? (
+                    t.bio.map((p) => <p key={p}>{p}</p>)
+                  ) : (
+                    <Pending>a biography, in their own words.</Pending>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
-          <Pending>trustee photographs and biographies.</Pending>
+          <Pending>trustee photographs.</Pending>
           <div className="sx-advisers">
             <p className="sx-row-label">Advisers</p>
             <p className="sx-advisers-names">{aboutPage.advisers.join("  ·  ")}</p>

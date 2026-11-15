@@ -58,7 +58,7 @@ export function OurWork() {
           <span>Our work</span>
         </p>
         <h2 id="work-title" className="sx-h2">
-          One hospital, and the outreach that comes first.
+          One hospital, and the outreach beside it.
         </h2>
         <div className="sx-rows">
           <article className="sx-row" aria-labelledby="work-hospital">

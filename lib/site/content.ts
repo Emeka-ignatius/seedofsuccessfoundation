@@ -25,7 +25,15 @@ export const reciprocity = {
 } as const;
 
 /** Build timeline (PRD §4.3). Admin-editable in Phase 2; hard-coded here for the design. */
-export type Milestone = { when: string; what: string; current?: boolean };
+/** A photograph with the words that describe it. Captions state only what the frame shows. */
+export type Plate = { src: string; alt: string; caption: string };
+
+export type Milestone = {
+  when: string;
+  what: string;
+  current?: boolean;
+  plates?: readonly Plate[];
+};
 
 export const milestones: readonly Milestone[] = [
   {
@@ -39,15 +47,46 @@ export const milestones: readonly Milestone[] = [
   {
     when: "December 2025 to January 2026",
     what: "A UK group is welcomed to Orlu and the foundation stone is laid.",
+    plates: [
+      {
+        src: "/media/about-land.jpg",
+        alt: "The cleared red-earth site at Abajah seen from above, palms at its edge and people gathered across it.",
+        caption: "The land at Abajah.",
+      },
+      {
+        src: "/media/about-stone.jpg",
+        alt: "The bishop at the blessing of the foundation stone, surrounded by clergy and visitors.",
+        caption: "The foundation stone is blessed.",
+      },
+      {
+        src: "/media/about-welcome.jpg",
+        alt: "Dancers in red and white leading the welcome at the Abajah site.",
+        caption: "The welcome at the site.",
+      },
+    ],
   },
   {
     when: "29 January 2026",
     what: "Construction begins, led by architect Ifeanyi Achugasim and engineer Emeka Ngwangwa.",
+    plates: [
+      {
+        src: "/media/builders.jpg",
+        alt: "Five builders in hard hats and high-visibility vests, standing together on the cleared site at Abajah.",
+        caption: "The builders at the Abajah site.",
+      },
+    ],
   },
   {
     when: "Ongoing",
     what: "The building rises. Dated progress photographs follow.",
     current: true,
+    plates: [
+      {
+        src: "/media/grove-4.jpg",
+        alt: "Builders at work on the roof of St Perpetua Hospital, with bamboo scaffolding along the walls below.",
+        caption: "Builders at work on the roof.",
+      },
+    ],
   },
 ];
 
@@ -158,10 +197,36 @@ export const aboutPage = {
   ],
   trustees: [
     { name: "Dr Deborah Van Kroonenburg", role: "Chair of Trustees" },
-    { name: "Very Revd Dr Canon Anthony C. Onuoha", role: "Trustee" },
+    {
+      name: "Very Revd Dr Canon Anthony C. Onuoha",
+      role: "Trustee",
+      // Supplied by the charity (his biography document). Only a stray comma in the first sentence was corrected.
+      bio: [
+        "Very Revd Dr Canon Anthony C. Onuoha is a Catholic priest and charity leader with extensive experience in leadership, governance, and community development. He holds degrees in Philosophy, Theology, Religious Studies, International Relations and Globalization, and a PhD from Cardiff Metropolitan University.",
+        "Ordained to the priesthood in 2000, he has served in leadership roles in both Nigeria and the United Kingdom. Since 2017, he has been the Managing Chaplain at HMP Channings Wood. In 2024, he was appointed National Catholic Chaplain for Prisons in England and Wales and Roman Catholic Faith and Belief Adviser to the Ministry of Justice.",
+        "As a Trustee of Seed of Success Foundation, Fr Anthony is passionate about improving healthcare access and helping deliver the vision of St. Perpetua Hospital and community medical outreach programmes for underserved communities in Orlu Province, Nigeria.",
+      ],
+    },
     { name: "Fr Evangelist Ohaejesi", role: "Trustee" },
-  ],
+  ] as readonly Trustee[],
   advisers: ["Chris Kemp", "Brian Bargent", "Fr George Nwadike"],
+} as const;
+
+export type Trustee = { name: string; role: string; bio?: readonly string[] };
+
+/** Get Involved (PRD §4.5), in the order the client asked: prayer first. Amounts and current needs are outstanding. */
+export const involvePage = {
+  pray: {
+    quote: "Before we ask for money, we ask for your prayers.",
+    body: "Prayer is open to everyone, including the housebound, the sick, the elderly and schoolchildren across both dioceses.",
+  },
+  give: "Every gift helps the building rise. All that has been raised so far has gone straight into the project.",
+  fundraise: "Marathons, parish and school activities, or a JustGiving page.",
+  volunteer: "Offer your time and skills to the work of the foundation.",
+  sponsor: "Name a ward or a piece of equipment in St Perpetua Hospital.",
+  /** Verbatim from the client's brief (PRD §1.1). */
+  ethics:
+    "We do not accept any sponsorship that endorses products or values which contravene Catholic values.",
 } as const;
 
 export const navigation = [
