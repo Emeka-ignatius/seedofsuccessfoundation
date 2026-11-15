@@ -1,0 +1,48 @@
+{
+  "$comment": "Single source of truth for strict areas. Read by .claude/hooks/guard.mjs, scripts/protected/check.mjs and scripts/protected/gen-codeowners.mjs. Editing this file is itself a protected change (area: governance).",
+  "owners": ["@REPLACE_WITH_GITHUB_HANDLE"],
+  "areas": [
+    {
+      "id": "auth",
+      "name": "Admin auth & sessions",
+      "rules": "lib/auth/CLAUDE.md",
+      "globs": ["lib/auth/**", "app/admin/(auth)/**"]
+    },
+    {
+      "id": "payments",
+      "name": "Donations, Stripe, webhooks & fees",
+      "rules": "lib/payments/CLAUDE.md",
+      "globs": ["lib/payments/**", "app/donate/**", "app/api/webhooks/**"]
+    },
+    {
+      "id": "giftaid",
+      "name": "Gift Aid & donor PII",
+      "rules": "lib/giftaid/CLAUDE.md",
+      "globs": ["lib/giftaid/**"]
+    },
+    {
+      "id": "security",
+      "name": "Security config, proxy & secrets",
+      "rules": "lib/security/CLAUDE.md",
+      "globs": ["lib/security/**", "proxy.ts", "next.config.ts", ".env", ".env.*"]
+    },
+    {
+      "id": "schema",
+      "name": "Database schema & migrations",
+      "rules": "prisma/CLAUDE.md",
+      "globs": ["prisma/**", "prisma.config.ts"]
+    },
+    {
+      "id": "strict-tests",
+      "name": "Tests that guard strict areas",
+      "rules": "lib/security/CLAUDE.md",
+      "globs": ["tests/strict/**"]
+    },
+    {
+      "id": "governance",
+      "name": "Enforcement machinery",
+      "rules": "CLAUDE.md",
+      "globs": [".claude/**", ".githooks/**", ".github/**", "scripts/protected/**"]
+    }
+  ]
+}

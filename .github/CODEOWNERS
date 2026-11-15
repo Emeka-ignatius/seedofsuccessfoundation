@@ -1,0 +1,35 @@
+# GENERATED from .claude/protected-paths.json by scripts/protected/gen-codeowners.mjs. Do not edit by hand.
+# Note: 'Require review from Code Owners' is intentionally NOT enabled while there is a single owner
+# (GitHub does not let a PR author approve their own PR). Enable it when a second person joins.
+
+# Admin auth & sessions
+/lib/auth/ @REPLACE_WITH_GITHUB_HANDLE
+/app/admin/(auth)/ @REPLACE_WITH_GITHUB_HANDLE
+
+# Donations, Stripe, webhooks & fees
+/lib/payments/ @REPLACE_WITH_GITHUB_HANDLE
+/app/donate/ @REPLACE_WITH_GITHUB_HANDLE
+/app/api/webhooks/ @REPLACE_WITH_GITHUB_HANDLE
+
+# Gift Aid & donor PII
+/lib/giftaid/ @REPLACE_WITH_GITHUB_HANDLE
+
+# Security config, proxy & secrets
+/lib/security/ @REPLACE_WITH_GITHUB_HANDLE
+/proxy.ts @REPLACE_WITH_GITHUB_HANDLE
+/next.config.ts @REPLACE_WITH_GITHUB_HANDLE
+/.env @REPLACE_WITH_GITHUB_HANDLE
+/.env.* @REPLACE_WITH_GITHUB_HANDLE
+
+# Database schema & migrations
+/prisma/ @REPLACE_WITH_GITHUB_HANDLE
+/prisma.config.ts @REPLACE_WITH_GITHUB_HANDLE
+
+# Tests that guard strict areas
+/tests/strict/ @REPLACE_WITH_GITHUB_HANDLE
+
+# Enforcement machinery
+/.claude/ @REPLACE_WITH_GITHUB_HANDLE
+/.githooks/ @REPLACE_WITH_GITHUB_HANDLE
+/.github/ @REPLACE_WITH_GITHUB_HANDLE
+/scripts/protected/ @REPLACE_WITH_GITHUB_HANDLE
