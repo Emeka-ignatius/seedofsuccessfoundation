@@ -10,7 +10,6 @@
 // Outputs:
 //   public/media/grove-1..5.jpg   the rotating background on the holding page, in the order backdrop.tsx shows them.
 //                                 Chosen by the site owner. Sources are in `originals/grove-source/`.
-//   public/media/holding-bg.jpg   a palm-grove strip (canopy only, no people) read by the social-share (OG) image.
 import sharp from "sharp";
 import { mkdirSync, statSync } from "node:fs";
 
@@ -27,9 +26,6 @@ const GROVE = [
   "grove-source/grove-5.jpg",
 ];
 
-// The social-share card: the top strip of an outdoor frame (palm canopy), as fractions of the upright image.
-const OG = { file: "images/day_1/camera/KAY_5841.JPG", left: 0.15, width: 0.7, height: 0.33 };
-
 mkdirSync(OUT_DIR, { recursive: true });
 
 async function write(pipeline, out, width, quality = 70) {
@@ -45,18 +41,3 @@ async function write(pipeline, out, width, quality = 70) {
 // .rotate() honours EXIF orientation; sharp then drops all metadata by default.
 for (const [i, file] of GROVE.entries())
   await write(sharp(`${ORIGINALS}/${file}`).rotate(), `${OUT_DIR}/grove-${i + 1}.jpg`, 2400);
-
-const meta = await sharp(`${ORIGINALS}/${OG.file}`).rotate().metadata();
-await write(
-  sharp(`${ORIGINALS}/${OG.file}`)
-    .rotate()
-    .extract({
-      left: Math.round(meta.width * OG.left),
-      top: 0,
-      width: Math.round(meta.width * OG.width),
-      height: Math.round(meta.height * OG.height),
-    }),
-  `${OUT_DIR}/holding-bg.jpg`,
-  2400,
-  68,
-);

@@ -13,7 +13,8 @@ export const charity = {
   mission:
     "To transform healthcare in Abajah and the wider Orlu Province of Imo State, Nigeria, by establishing and supporting St Perpetua Hospital.",
   need: "One million people in Orlu Province have limited access to hospital care.",
-  siteUrl: "https://seedofsuccessfoundation.com",
+  /** The address people are redirected to: the bare domain 308-redirects here, so canonical URLs must name `www`. */
+  siteUrl: "https://www.seedofsuccessfoundation.com",
   // Outstanding from the client (PRD §16). Blocking for launch, not for development.
   contactEmail: null as string | null,
   registeredAddress: null as string | null,

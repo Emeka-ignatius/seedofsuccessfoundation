@@ -28,7 +28,9 @@ export function Backdrop() {
           // Only the first is needed to paint; the rest are not shown for another nine seconds.
           priority={i === 0}
           fetchPriority={i === 0 ? "high" : "low"}
-          sizes="250vw"
+          // A cover-fitted, dimmed texture: on a phone the visible slice is wider than the screen, so ask for
+          // a little more than the viewport, not 250vw (which made every device download the 3840px version).
+          sizes="(max-width: 640px) 150vw, 100vw"
           className={i === 0 ? "holding-photo holding-photo-first" : "holding-photo"}
           style={{ "--slide": i } as React.CSSProperties}
         />
