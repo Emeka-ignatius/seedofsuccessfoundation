@@ -3,6 +3,7 @@ import { SignupForm } from "@/components/holding/signup-form";
 import { getEnv } from "@/lib/security/env";
 import { charity } from "@/lib/site/charity";
 import {
+  hospitalFacts,
   hospitalServices,
   involvement,
   need,
@@ -69,11 +70,7 @@ export function OurWork() {
               <h3 id="work-hospital" className="sx-h3">
                 St Perpetua Hospital
               </h3>
-              <p>
-                A hospital for Abajah and the wider Orlu Province, providing accessible, quality
-                medical care to children, young people, older adults and vulnerable members of
-                society.
-              </p>
+              <p>{hospitalFacts.summary}</p>
               <Link href="/our-work/st-perpetua-hospital" className="sx-link">
                 About the hospital
               </Link>

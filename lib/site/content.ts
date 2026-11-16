@@ -19,9 +19,9 @@ export const reciprocity = {
   /** PRD §4.1 section 3, verbatim. */
   lead: "Since 2006, priests from Orlu have served parishes across seven English dioceses. Today those communities are helping build a hospital in Orlu.",
   orluGivesEngland:
-    "Priests of the Diocese of Orlu have served Catholic parishes across England since 2006, and sisters too.",
+    "Since 2006, priests of the Diocese of Orlu have ministered to Catholics in Plymouth and other English dioceses, and sisters too. It began with the initiative of (then) Bishop Mark O'Toole of Plymouth, who visited Bishop Augustine and his people.",
   englandGivesOrlu:
-    "In April 2024 Dr Deborah Van Kroonenburg visited Orlu with Fr Anthony, and the vision of a hospital formed. Land was acquired, funds were raised in the UK and in Orlu, and the foundation stone was laid.",
+    "In April 2024 Deborah Van Kroonenburg visited Orlu with Fr Anthony Onuoha, as a guest of Bishop Augustine. They were distressed to learn that, despite the skill and dedication of those working there, health care was inadequate. There and then a vision formed of a new 50-bed hospital in Abajah, with diagnostic and outreach facilities. Land was acquired, and the foundation stone was laid on 29 December 2025.",
 } as const;
 
 /** Build timeline (PRD §4.3). Admin-editable in Phase 2; hard-coded here for the design. */
@@ -38,15 +38,15 @@ export type Milestone = {
 export const milestones: readonly Milestone[] = [
   {
     when: "April 2024",
-    what: "Dr Deborah Van Kroonenburg visits Orlu with Fr Anthony. The vision forms.",
+    what: "Deborah Van Kroonenburg visits Orlu with Fr Anthony Onuoha, as a guest of Bishop Augustine. A vision forms: a new 50-bed hospital in Abajah.",
   },
   {
     when: "2024 to 2025",
-    what: "Land acquired, the building planned, funds raised in the UK and in Orlu.",
+    what: "People in the UK and in Orlu respond to the need. Land is acquired and the building planned, with the support of Bishop Augustine and others.",
   },
   {
     when: "December 2025 to January 2026",
-    what: "A UK group is welcomed to Orlu and the foundation stone is laid.",
+    what: "A group from the UK is welcomed to the Diocese of Orlu. The foundation stone is laid on 29 December 2025.",
     plates: [
       {
         src: "/media/about-land.jpg",
@@ -67,7 +67,7 @@ export const milestones: readonly Milestone[] = [
   },
   {
     when: "29 January 2026",
-    what: "Construction begins, led by architect Ifeanyi Achugasim and engineer Emeka Ngwangwa.",
+    what: "Building begins, thanks to architect Ifeanyi Achugasim and engineer Emeka Ngwangwa, supervised by local engineers and builders with the advice of hospital managers and clinicians.",
     plates: [
       {
         src: "/media/builders.jpg",
@@ -89,6 +89,16 @@ export const milestones: readonly Milestone[] = [
     ],
   },
 ];
+
+/** What the hospital is, in the charity's words: a new 50-bed hospital in Abajah, with diagnostic and outreach facilities. */
+export const hospitalFacts = {
+  beds: 50,
+  summary:
+    "A new 50-bed hospital in Abajah, with diagnostic and outreach facilities, providing accessible, quality medical care to children, young people, older adults and vulnerable members of society.",
+  /** Who builds it: Orlu people as agents. */
+  builtBy:
+    "Thanks to the work of architect Ifeanyi Achugasim and engineer Emeka Ngwangwa in Orlu, the building is supervised by local engineers and builders, with the advice and guidance of hospital managers and clinicians.",
+} as const;
 
 /** What the hospital will provide (PRD §4.3). */
 export const hospitalServices = [
@@ -178,6 +188,14 @@ export const stewardship = "All that has been raised so far has gone straight in
 export const aboutPage = {
   vision:
     "A healthy and thriving Orlu Province where every individual has access to affordable, high-quality healthcare, and where St Perpetua Hospital serves as a beacon of hope, healing and compassionate care.",
+  /** The charity's own words (supporter text, 2026-11-16). */
+  credit: "We credit the St Perpetua Hospital project to the inspiration of the Holy Spirit.",
+  faith:
+    "Our shared faith is the bond which enables us to help each other, and also inspires us to work for the benefit of people of other faiths and none.",
+  portal:
+    "The Church provides low-cost health care in Orlu for those who cannot afford the expensive private care available only to the rich. She acts like a portal between the two communities, for the benefit of both.",
+  remit:
+    "To fund the construction and equipment of the new hospital and support its development as an efficient clinical facility.",
   objectives: [
     "Build St Perpetua Hospital.",
     "Improve access to healthcare.",
@@ -186,14 +204,14 @@ export const aboutPage = {
     "Provide health education and community outreach.",
   ],
   orluToEngland: [
-    "Since 2006, priests of the Diocese of Orlu have served Catholic parishes across England — and sisters too.",
-    "A church short of vocations has been sustained by Nigerian clergy for twenty years.",
+    "Thanks to the initiative of (then) Bishop Mark O'Toole of Plymouth, who visited Bishop Augustine and his people in Nigeria, priests from the Diocese of Orlu have ministered to Catholics in Plymouth and other dioceses in the UK since 2006.",
+    "Sisters have served too.",
   ],
   englandToOrlu: [
-    "Bishop Mark O'Toole visited Bishop Augustine.",
-    "In April 2024, Dr Deborah Van Kroonenburg visited Orlu with Fr Anthony. The vision of the hospital formed on that visit.",
-    "Land was acquired, the building was planned, and funds were raised in the UK and in Orlu.",
-    "In December 2025 and January 2026, a UK group was welcomed to Orlu, and the foundation stone was laid. Construction began on 29 January 2026.",
+    "In April 2024, Deborah Van Kroonenburg visited the Diocese of Orlu with Fr Anthony Onuoha, as a guest of Bishop Augustine. They were distressed to learn that, despite the skill and dedication of those working in this area, health care provision was inadequate.",
+    "There and then a vision formed, which became a plan for a new 50-bed hospital in Abajah, with diagnostic and outreach facilities.",
+    "The project began in prayer, and soon people in the UK and in Orlu responded to the need. Land was acquired and a building planned, thanks to the support of Bishop Augustine and others.",
+    "In December 2025 and January 2026 a group from the UK was welcomed to the Diocese of Orlu, and the foundation stone was laid on 29 December 2025. Building began on 29 January 2026.",
   ],
   trustees: [
     { name: "Dr Deborah Van Kroonenburg", role: "Chair of Trustees" },

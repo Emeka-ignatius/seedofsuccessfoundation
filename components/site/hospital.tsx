@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { charity } from "@/lib/site/charity";
-import { hospitalServices, milestones, need } from "@/lib/site/content";
+import { hospitalFacts, hospitalServices, milestones, need } from "@/lib/site/content";
 import { DayCount } from "./day-count";
 import { ElevationFlat } from "./elevation-flat";
 import { PageHead } from "./page-head";
@@ -22,7 +22,7 @@ export function Hospital() {
             A hospital for Abajah, <em>rising</em> in Orlu.
           </>
         }
-        lead="A hospital providing accessible, quality medical care to children, young people, older adults and vulnerable members of society."
+        lead={hospitalFacts.summary}
       />
 
       <div className="sx-wrap">
@@ -106,10 +106,7 @@ export function Hospital() {
           <h2 id="h-build" className="sx-h2">
             From a vision to a <em>building</em>.
           </h2>
-          <p className="sx-lead">
-            Designed by architect Ifeanyi Achugasim and engineer Emeka Ngwangwa, and built under the
-            supervision of local engineers and builders.
-          </p>
+          <p className="sx-lead">{hospitalFacts.builtBy}</p>
 
           <ol className="sx-chron" aria-label="Build timeline">
             {milestones.map((m) => (
@@ -159,7 +156,9 @@ export function Hospital() {
             Where the money goes.
           </h2>
           <p className="sx-lead">
-            All that has been raised so far has gone straight into the project.
+            All that has been raised so far has gone straight into the project. The
+            foundation&apos;s remit is to fund the construction and equipment of the new hospital
+            and support its development as an efficient clinical facility.
           </p>
           <Pending>
             the funding goal and the amount raised to date, for a progress indicator.

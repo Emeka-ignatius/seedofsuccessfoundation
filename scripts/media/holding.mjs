@@ -44,6 +44,7 @@ const PLATES = [
   ["day_1/camera/KAY_5954.JPG", "about-welcome.jpg", 1400],
   ["day_1/camera/KAY_5923.JPG", "builders.jpg", 1600],
   ["day_1/camera/KAY_5822.JPG", "pray-embrace.jpg", 1400],
+  ["foundation-stone/building.jpg", "foundation-stone.jpg", 1600],
 ];
 
 mkdirSync(OUT_DIR, { recursive: true });

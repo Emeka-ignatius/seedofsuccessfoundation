@@ -58,13 +58,13 @@ Anything marked **needed** blocks launch. Each page also shows a dashed "Awaitin
 
 ### About
 
-- A1. **Confirm two sentences** from the PRD narrative: "A church short of vocations has been sustained by Nigerian clergy for twenty years" and "Bishop Mark O'Toole visited Bishop Augustine". Give full names, titles, dioceses, the date and place of that visit.
-- A2. **Dr or Mrs Van Kroonenburg?** The PRD uses both; the site says "Dr". Confirm her preferred title.
+- A1. **Answered by the charity's own text (2026-11-16):** Bishop Mark O'Toole was then Bishop of Plymouth, and his initiative (visiting Bishop Augustine) is why Orlu priests have ministered in the UK since 2006. The stone names the bishop as Most Rev Dr Augustine Tochukwu Ukwuoma. The site now says all this. Still to confirm: whether to name Bishop Augustine in full on the site, and the date and place of Bishop O'Toole's visit.
+- A2. **Dr or Mrs Van Kroonenburg?** The supporter text says "Mrs Deborah van Kroonenburg"; the PRD's trustee list says "Dr"; the foundation stone gives no title. The story now uses no title; the trustee row says "Dr". Also: "van" or "Van"? Confirm her title and spelling.
 - A3. **Biographies and portraits** for Dr Deborah Van Kroonenburg and Fr Evangelist Ohaejesi (Canon Anthony's biography is in). Each: portrait, 2 to 3 sentences, written permission.
 - A4. **Advisers** (Chris Kemp, Brian Bargent, Fr George Nwadike): roles, short biographies, photographs if they want them shown.
 - A5. **Governance and accountability:** is there an annual report or accounts we can link? The page says "all that has been raised so far has gone straight into the project": is that still true, and can they stand behind it?
 - A6. **Who are the people in each photograph?** We caption only what the frame shows. If they want names under pictures, send names with permission.
-- A7. **Is Fr Anthony the same person as Canon Anthony C. Onuoha?** Treated as yes, from his biography.
+- A7. **Resolved: Fr Anthony is Fr Anthony Onuoha** (the supporter text says so, and the site now says it). **New question:** the foundation stone is inscribed "Deborah Van Kroonenburg & **Anthony Akinpello**". Is that an error on the stone, or a different person? Worth knowing before the stone photograph is used widely, since it names him.
 
 ### Our Work (index)
 
@@ -75,10 +75,15 @@ Anything marked **needed** blocks launch. Each page also shows a dashed "Awaitin
 - P1. **Expected impact:** what the hospital is expected to achieve, with figures they can stand behind (needed).
 - P2. **Funding goal and amount raised to date**, so we can show a progress line. Also: how often is it updated, and who updates it?
 - P3. **Build milestones:** confirm each date and wording, and **the real dates of the ceremony photographs** (we avoid dating them).
-- P4. **The five builders in hard hats:** names and roles, with their permission, so the page can name Orlu people as the people building it. Also the main contractor, if they want credit.
-- P5. **Names of the "local engineers and builders"** who supervise the site.
+- P4. **The five builders in hard hats:** names and roles, with their permission, so the page can name Orlu people as the people building it. Also: **the hospital managers and clinicians** who advise on the build (the supporter text credits them): names and roles, if they are willing to be named.
+- P5. **Names of the "local engineers and builders"** who supervise the site. Also: the supporter text spells the architect "Ifeeanyi"; the PRD says "Ifeanyi". Which is right?
 - P6. **Expected opening date or phases** (foundation, structure, fit-out), if they are willing to publish one.
 - P7. **The architect's elevation drawing** from Ifeanyi Achugasim (we show a stand-in line drawing).
+
+- P8. **Is it a 50-bed hospital?** The supporter text says "a new 50 bed hospital in Abajah with diagnostic and outreach facilities". The site now says so. Confirm the number, and whether the first phase is smaller.
+- P9. **"Orlu Province" or "Orlu zone"?** The mission statement says "the 1 million inhabitants of Orlu zone in SE Nigeria"; the PRD's mission says "Orlu Province of Imo State". The site says "Province". Which is the charity's term?
+- P10. **Land:** the mission statement says "the community have provided land"; the supporter text says "land was acquired". The site says "acquired". Was it given by the community, bought, or both?
+- P11. **"Sisters too":** the site says sisters have served in England as well as priests, from the PRD. The supporter text only mentions priests. Confirm.
 
 ### Medical Outreach
 
@@ -127,6 +132,8 @@ Anything marked **needed** blocks launch. Each page also shows a dashed "Awaitin
 5. **Photo placement.** The "embrace" photo opens prayer on Get Involved. The ceremony photos sit under the December 2025 to January 2026 entry of the build chronicle, captioned only with what they show (not dated). The builders sit under 29 January 2026 without claiming the photo's date.
 6. **Copy I wrote lightly:** "Every gift helps the building rise" (Give), "We would like to hear from you" (Contact), "There is a place for everyone in this work. We begin with prayer." (Get Involved). Everything else is the PRD's or the client's own words. Change any you dislike.
 7. **Outreach page leads with the eight services, set large,** since there are no photos. When permitted photos arrive, they slot in below the lead.
+
+8. **2026-11-16: aligned the copy with the charity's own text.** Removed "a church short of vocations... twenty years" (not in their text). Added: the 50-bed hospital with diagnostic and outreach facilities; guests of Bishop Augustine; the clinicians' and hospital managers' advice on the build; the Church as a portal; "people of other faiths and none"; the remit; the credit to the Holy Spirit. Moved Bishop O'Toole into the Orlu-to-England story (it is why the priests came). Used no title for Deborah Van Kroonenburg in the story until A2 is answered. The stone date (29 December 2025) is now in the timeline. The building start date is unchanged: 29 January 2026, which the charity's text confirms.
 
 ## 4. Known rough edges
 

@@ -35,6 +35,7 @@ export function About() {
           <h2 id="story-title" className="sx-h2">
             A see-saw, kept in <em>balance</em>.
           </h2>
+          <p className="sx-lead">{aboutPage.credit}</p>
           <figure className="sx-plate sx-plate-wide">
             <div className="sx-plate-frame">
               <Image
@@ -141,6 +142,7 @@ export function About() {
               <figcaption>The welcome at the site.</figcaption>
             </figure>
           </div>
+          <blockquote className="sx-ethic sx-faith">{aboutPage.faith}</blockquote>
         </div>
       </section>
 
@@ -163,6 +165,10 @@ export function About() {
             <div>
               <h3 className="sx-h3">Vision</h3>
               <p>{aboutPage.vision}</p>
+            </div>
+            <div>
+              <h3 className="sx-h3">Remit</h3>
+              <p>{aboutPage.remit}</p>
             </div>
           </div>
           <ol className="sx-objectives">
@@ -221,6 +227,7 @@ export function About() {
             Accountable for every gift.
           </h2>
           <p className="sx-lead">{stewardship}</p>
+          <p>{aboutPage.portal}</p>
           <p>
             {charity.name} is a {charity.registration}, no.{" "}
             <span className="sx-nowrap">{charity.registeredCharityNumber}</span>.

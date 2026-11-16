@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { charity } from "@/lib/site/charity";
-import { hospitalServices, outreachServices } from "@/lib/site/content";
+import { hospitalFacts, hospitalServices, outreachServices } from "@/lib/site/content";
 import { PageHead } from "./page-head";
 import { SiteShell } from "./shell";
 
@@ -40,11 +40,7 @@ export function OurWorkPage() {
               <h2 id="ow-hospital" className="sx-h2">
                 St Perpetua Hospital
               </h2>
-              <p className="sx-lead">
-                A hospital for Abajah and the wider Orlu Province, providing accessible, quality
-                medical care to children, young people, older adults and vulnerable members of
-                society.
-              </p>
+              <p className="sx-lead">{hospitalFacts.summary}</p>
               <ul className="sx-ticks">
                 {hospitalServices.map((s) => (
                   <li key={s}>{s}</li>
