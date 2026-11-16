@@ -11,7 +11,6 @@ export function Contact() {
   return (
     <SiteShell>
       <PageHead
-        eyebrow="Contact"
         title={
           <>
             We would like to <em>hear</em> from you.

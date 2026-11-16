@@ -17,9 +17,6 @@ export function About() {
     <SiteShell>
       <section className="sx-section sx-page-head" aria-labelledby="about-title">
         <div className="sx-wrap">
-          <p className="sx-eyebrow">
-            <span>About us</span>
-          </p>
           <h1 id="about-title" className="sx-h1">
             Two communities, <em>one hospital</em>.
           </h1>

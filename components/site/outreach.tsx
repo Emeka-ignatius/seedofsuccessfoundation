@@ -14,7 +14,6 @@ export function Outreach() {
   return (
     <SiteShell>
       <PageHead
-        eyebrow="Our work · Medical Outreach Programme"
         title={
           <>
             Care taken out to the <em>community</em>.

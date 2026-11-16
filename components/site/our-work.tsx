@@ -10,7 +10,6 @@ export function OurWorkPage() {
   return (
     <SiteShell>
       <PageHead
-        eyebrow="Our work"
         title={
           <>
             One hospital, and the <em>outreach</em> beside it.

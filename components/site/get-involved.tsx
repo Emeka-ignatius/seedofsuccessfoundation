@@ -14,7 +14,6 @@ export function GetInvolvedPage() {
   return (
     <SiteShell>
       <PageHead
-        eyebrow="Get involved"
         title={
           <>
             Pray, give, fundraise, volunteer, <em>sponsor</em>, partner.

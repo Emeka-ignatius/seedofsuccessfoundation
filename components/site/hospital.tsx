@@ -17,7 +17,6 @@ export function Hospital() {
   return (
     <SiteShell>
       <PageHead
-        eyebrow="Our work · St Perpetua Hospital"
         title={
           <>
             A hospital for Abajah, <em>rising</em> in Orlu.
